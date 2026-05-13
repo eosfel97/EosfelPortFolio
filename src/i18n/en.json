@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "cv": "Resume",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Any Gnahiet",
+    "subtitle": "Full-Stack Developer",
+    "cta": "View my projects"
+  },
+  "project": {
+    "viewSource": "View source",
+    "viewLive": "View live",
+    "backToList": "Back to projects",
+    "techs": "Technologies",
+    "status": {
+      "completed": "Completed",
+      "in-progress": "In progress",
+      "archived": "Archived"
+    }
+  },
+  "cv": {
+    "download": "Download Resume (PDF)",
+    "downloadLabel": "Download my resume as PDF"
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "Send me an email"
+  },
+  "blog": {
+    "comingSoon": "Blog coming soon."
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "sourceCode": "Source code"
+  },
+  "a11y": {
+    "skipToContent": "Skip to main content",
+    "toggleTheme": "Toggle theme",
+    "switchLang": "Switch language",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  }
+}

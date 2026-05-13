@@ -1,0 +1,48 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "cv": "CV",
+    "contact": "Contact",
+    "blog": "Blog"
+  },
+  "hero": {
+    "title": "Any Gnahiet",
+    "subtitle": "Développeur Full-Stack",
+    "cta": "Voir mes projets"
+  },
+  "project": {
+    "viewSource": "Voir le code",
+    "viewLive": "Voir en ligne",
+    "backToList": "Retour aux projets",
+    "techs": "Technologies",
+    "status": {
+      "completed": "Terminé",
+      "in-progress": "En cours",
+      "archived": "Archivé"
+    }
+  },
+  "cv": {
+    "download": "Télécharger le CV (PDF)",
+    "downloadLabel": "Télécharger mon CV en PDF"
+  },
+  "contact": {
+    "title": "Contact",
+    "email": "M'envoyer un email"
+  },
+  "blog": {
+    "comingSoon": "Le blog arrive bientôt."
+  },
+  "footer": {
+    "rights": "Tous droits réservés.",
+    "sourceCode": "Code source"
+  },
+  "a11y": {
+    "skipToContent": "Aller au contenu principal",
+    "toggleTheme": "Basculer le thème",
+    "switchLang": "Changer de langue",
+    "openMenu": "Ouvrir le menu",
+    "closeMenu": "Fermer le menu"
+  }
+}

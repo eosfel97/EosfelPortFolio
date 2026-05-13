@@ -34,9 +34,18 @@
     "present": "present",
     "pdfNotice": "This resume is available for download as a PDF."
   },
+  "about": {
+    "title": "About",
+    "intro": "Who am I?",
+    "what": "What I do",
+    "values": "What matters to me"
+  },
   "contact": {
     "title": "Contact",
-    "email": "Send me an email"
+    "subtitle": "A question, an opportunity, a project? Write to me.",
+    "email": "Send me an email",
+    "or": "or find me on",
+    "response": "I usually reply within 48 hours."
   },
   "blog": {
     "comingSoon": "Blog coming soon."

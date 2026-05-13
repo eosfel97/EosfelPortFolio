@@ -34,9 +34,18 @@
     "present": "présent",
     "pdfNotice": "Ce CV est disponible en téléchargement au format PDF."
   },
+  "about": {
+    "title": "À propos",
+    "intro": "Qui suis-je ?",
+    "what": "Ce que je fais",
+    "values": "Ce qui m'importe"
+  },
   "contact": {
     "title": "Contact",
-    "email": "M'envoyer un email"
+    "subtitle": "Une question, une opportunité, un projet ? Écrivez-moi.",
+    "email": "M'envoyer un email",
+    "or": "ou retrouvez-moi sur",
+    "response": "Je réponds généralement sous 48 h."
   },
   "blog": {
     "comingSoon": "Le blog arrive bientôt."

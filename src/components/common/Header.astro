@@ -1,0 +1,112 @@
+---
+import type { Locale } from '../../consts';
+import { useTranslations } from '../../i18n/utils';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  lang: Locale;
+  pathname: string;
+}
+
+const { lang, pathname } = Astro.props;
+const t = useTranslations(lang);
+
+const navLinks = [
+  { key: 'nav.about' as const, href: `/${lang}/about` },
+  { key: 'nav.projects' as const, href: `/${lang}/projects` },
+  { key: 'nav.cv' as const, href: `/${lang}/cv` },
+  { key: 'nav.contact' as const, href: `/${lang}/contact` },
+];
+---
+
+<header class="site-header">
+  <nav class="nav-inner" aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
+    <a href={`/${lang}`} class="nav-logo" aria-label="Any Gnahiet — Accueil"> AG </a>
+
+    <ul class="nav-links" role="list">
+      {
+        navLinks.map(({ key, href }) => (
+          <li>
+            <a
+              href={href}
+              class:list={['nav-link', { active: pathname.startsWith(href) }]}
+              aria-current={pathname.startsWith(href) ? 'page' : undefined}
+            >
+              {t(key)}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="nav-controls">
+      <ThemeToggle label={t('a11y.toggleTheme')} />
+      <LanguageSwitcher currentLang={lang} pathname={pathname} label={t('a11y.switchLang')} />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: var(--space-4) var(--space-6);
+  }
+
+  .nav-logo {
+    font-size: var(--text-xl);
+    font-weight: 800;
+    text-decoration: none;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+  }
+
+  .nav-logo:hover {
+    color: var(--color-accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-1);
+    list-style: none;
+    flex: 1;
+  }
+
+  .nav-link {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--color-text-muted);
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .nav-link:hover,
+  .nav-link.active {
+    color: var(--color-text);
+    background-color: var(--color-bg-subtle);
+  }
+
+  .nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: auto;
+  }
+</style>

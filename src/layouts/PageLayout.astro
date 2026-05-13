@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
 import type { Locale } from '../consts';
 
 interface Props {
@@ -11,6 +13,7 @@ interface Props {
 }
 
 const { title, description, lang, canonicalUrl, alternateUrls } = Astro.props;
+const pathname = Astro.url.pathname;
 ---
 
 <BaseLayout
@@ -20,15 +23,11 @@ const { title, description, lang, canonicalUrl, alternateUrls } = Astro.props;
   canonicalUrl={canonicalUrl}
   alternateUrls={alternateUrls}
 >
-  <header>
-    <slot name="header" />
-  </header>
+  <Header lang={lang} pathname={pathname} />
 
   <main id="main-content">
     <slot />
   </main>
 
-  <footer>
-    <slot name="footer" />
-  </footer>
+  <Footer lang={lang} />
 </BaseLayout>

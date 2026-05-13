@@ -1,10 +1,12 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import ProjectLayout from '../../../layouts/ProjectLayout.astro';
 
 export const getStaticPaths = (() => {
   return [];
 }) satisfies GetStaticPaths;
-// TODO: étapes suivantes
 ---
 
-<p>fr/projects/[slug] — placeholder</p>
+<ProjectLayout title="Projet" description="Détail projet" lang="fr">
+  <p>fr/projects/[slug] — placeholder</p>
+</ProjectLayout>

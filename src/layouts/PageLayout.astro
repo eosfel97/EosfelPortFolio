@@ -1,0 +1,34 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { Locale } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: Locale;
+  canonicalUrl?: string;
+  alternateUrls?: { lang: Locale; url: string }[];
+}
+
+const { title, description, lang, canonicalUrl, alternateUrls } = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  canonicalUrl={canonicalUrl}
+  alternateUrls={alternateUrls}
+>
+  <header>
+    <slot name="header" />
+  </header>
+
+  <main id="main-content">
+    <slot />
+  </main>
+
+  <footer>
+    <slot name="footer" />
+  </footer>
+</BaseLayout>

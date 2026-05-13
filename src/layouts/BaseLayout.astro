@@ -1,0 +1,70 @@
+---
+import '../styles/global.css';
+import { SITE_TITLE, SITE_URL } from '../consts';
+import type { Locale } from '../consts';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang: Locale;
+  canonicalUrl?: string;
+  ogImage?: string;
+  alternateUrls?: { lang: Locale; url: string }[];
+}
+
+const {
+  title,
+  description = 'Portfolio de Any Gnahiet, développeur full-stack.',
+  lang,
+  canonicalUrl = Astro.url.href,
+  ogImage = `${SITE_URL}/og-default.png`,
+  alternateUrls = [],
+} = Astro.props;
+
+const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+
+    <!-- hreflang -->
+    {alternateUrls.map(({ lang: l, url }) => <link rel="alternate" hreflang={l} href={url} />)}
+    <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/en`} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Dark mode: évite le flash en lisant le thème avant le rendu -->
+    <script is:inline>
+      const stored = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute(
+        'data-theme',
+        stored ?? (prefersDark ? 'dark' : 'light'),
+      );
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">
+      {lang === 'fr' ? 'Aller au contenu principal' : 'Skip to main content'}
+    </a>
+
+    <slot />
+  </body>
+</html>

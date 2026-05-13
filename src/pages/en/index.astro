@@ -1,11 +1,29 @@
 ---
+import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
+import ProjectCard from '../../components/projects/ProjectCard.astro';
 import { useTranslations } from '../../i18n/utils';
-import { SITE_URL } from '../../consts';
+import { SITE_URL, SOCIAL_LINKS } from '../../consts';
 
 const lang = 'en' as const;
 const t = useTranslations(lang);
+
+const allProjects = await getCollection('projects');
+const featured = allProjects
+  .filter((p) => p.id.startsWith('en/') && p.data.featured)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
 const alternateUrls = [{ lang: 'fr' as const, url: `${SITE_URL}/fr` }];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Any Gnahiet',
+  url: SITE_URL,
+  jobTitle: t('hero.subtitle'),
+  sameAs: [SOCIAL_LINKS.github, SOCIAL_LINKS.linkedin],
+};
 ---
 
 <PageLayout
@@ -13,15 +31,56 @@ const alternateUrls = [{ lang: 'fr' as const, url: `${SITE_URL}/fr` }];
   title="Home"
   description="Portfolio of Any Gnahiet, full-stack developer specialized in React, Spring Boot and React Native."
   alternateUrls={alternateUrls}
+  jsonLd={jsonLd}
 >
-  <section class="hero">
-    <h1>{t('hero.title')}</h1>
-    <p class="subtitle">{t('hero.subtitle')}</p>
-    <a href="/en/projects" class="cta">{t('hero.cta')}</a>
-  </section>
+  <div class="home">
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">{t('hero.title')}</h1>
+      <p class="subtitle">{t('hero.subtitle')}</p>
+      <div class="hero-actions">
+        <a href="/en/projects" class="btn btn--primary">{t('hero.cta')}</a>
+        <a href="/en/about" class="btn btn--secondary">About me</a>
+      </div>
+    </section>
+
+    {
+      featured.length > 0 && (
+        <section class="featured-section" aria-labelledby="featured-title">
+          <h2 id="featured-title">Featured projects</h2>
+          <ul class="featured-grid" role="list">
+            {featured.map((project) => (
+              <li>
+                <ProjectCard
+                  title={project.data.title}
+                  description={project.data.description}
+                  slug={project.data.slug}
+                  techs={project.data.techs}
+                  status={project.data.status}
+                  featured={project.data.featured}
+                  repoUrl={project.data.repoUrl}
+                  liveUrl={project.data.liveUrl}
+                  lang={lang}
+                />
+              </li>
+            ))}
+          </ul>
+          <div class="all-projects-link">
+            <a href="/en/projects" class="btn btn--secondary">
+              All projects →
+            </a>
+          </div>
+        </section>
+      )
+    }
+  </div>
 </PageLayout>
 
 <style>
+  .home {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
   .hero {
     display: flex;
     flex-direction: column;
@@ -30,36 +89,69 @@ const alternateUrls = [{ lang: 'fr' as const, url: `${SITE_URL}/fr` }];
     text-align: center;
     min-height: 60vh;
     gap: var(--space-6);
-    padding: var(--space-16) var(--space-6);
-    max-width: var(--max-width-content);
-    margin: 0 auto;
+    padding: var(--space-16) 0;
   }
-
   h1 {
-    font-size: var(--text-4xl);
+    font-size: clamp(var(--text-3xl), 6vw, 4rem);
     font-weight: 800;
     letter-spacing: -0.03em;
-    color: var(--color-text);
+    line-height: 1.1;
   }
-
   .subtitle {
     font-size: var(--text-xl);
     color: var(--color-text-muted);
+    max-width: 40ch;
   }
-
-  .cta {
-    display: inline-block;
+  .hero-actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: var(--space-2);
+  }
+  .btn {
+    font-size: var(--text-sm);
+    font-weight: 600;
     padding: var(--space-3) var(--space-8);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+  }
+  .btn--primary {
     background: var(--color-accent);
     color: #fff;
-    border-radius: var(--radius-md);
-    font-weight: 600;
-    text-decoration: none;
-    transition: background-color var(--transition-fast);
   }
-
-  .cta:hover {
+  .btn--primary:hover {
     background: var(--color-accent-hover);
     color: #fff;
+  }
+  .btn--secondary {
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+  .btn--secondary:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .featured-section {
+    padding: var(--space-16) 0;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-6);
+    list-style: none;
+  }
+  .all-projects-link {
+    display: flex;
   }
 </style>

@@ -10,9 +10,10 @@ interface Props {
   lang: Locale;
   canonicalUrl?: string;
   alternateUrls?: { lang: Locale; url: string }[];
+  jsonLd?: Record<string, unknown>;
 }
 
-const { title, description, lang, canonicalUrl, alternateUrls } = Astro.props;
+const { title, description, lang, canonicalUrl, alternateUrls, jsonLd } = Astro.props;
 const pathname = Astro.url.pathname;
 ---
 
@@ -22,6 +23,7 @@ const pathname = Astro.url.pathname;
   lang={lang}
   canonicalUrl={canonicalUrl}
   alternateUrls={alternateUrls}
+  jsonLd={jsonLd}
 >
   <Header lang={lang} pathname={pathname} />
 

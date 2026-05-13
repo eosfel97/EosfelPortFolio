@@ -48,6 +48,14 @@
   --transition-base: 250ms ease;
 }
 
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+  }
+}
+
 /* Dark theme */
 [data-theme='dark'] {
   --color-bg: #0f172a;

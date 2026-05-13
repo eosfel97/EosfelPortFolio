@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://anygnahiet.dev/sitemap-index.xml

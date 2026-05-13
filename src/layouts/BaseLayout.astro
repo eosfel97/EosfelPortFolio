@@ -10,6 +10,7 @@ interface Props {
   canonicalUrl?: string;
   ogImage?: string;
   alternateUrls?: { lang: Locale; url: string }[];
+  jsonLd?: Record<string, unknown>;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   canonicalUrl = Astro.url.href,
   ogImage = `${SITE_URL}/og-default.png`,
   alternateUrls = [],
+  jsonLd,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
@@ -49,6 +51,9 @@ const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- JSON-LD structured data -->
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     <!-- Dark mode: évite le flash en lisant le thème avant le rendu -->
     <script is:inline>

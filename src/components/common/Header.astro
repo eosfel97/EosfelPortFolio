@@ -18,13 +18,30 @@ const navLinks = [
   { key: 'nav.cv' as const, href: `/${lang}/cv` },
   { key: 'nav.contact' as const, href: `/${lang}/contact` },
 ];
+
+const homeLabel = lang === 'fr' ? 'Any Gnahiet — Accueil' : 'Any Gnahiet — Home';
 ---
 
 <header class="site-header">
   <nav class="nav-inner" aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}>
-    <a href={`/${lang}`} class="nav-logo" aria-label="Any Gnahiet — Accueil"> AG </a>
+    <a href={`/${lang}`} class="nav-logo" aria-label={homeLabel}>AG</a>
 
-    <ul class="nav-links" role="list">
+    <button
+      id="nav-toggle"
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label={t('a11y.openMenu')}
+      data-label-open={t('a11y.openMenu')}
+      data-label-close={t('a11y.closeMenu')}
+    >
+      <span class="burger-line" aria-hidden="true"></span>
+      <span class="burger-line" aria-hidden="true"></span>
+      <span class="burger-line" aria-hidden="true"></span>
+    </button>
+
+    <ul id="nav-links" class="nav-links" role="list">
       {
         navLinks.map(({ key, href }) => (
           <li>
@@ -59,10 +76,11 @@ const navLinks = [
   .nav-inner {
     display: flex;
     align-items: center;
-    gap: var(--space-6);
+    gap: var(--space-4);
     max-width: var(--max-width-content);
     margin: 0 auto;
     padding: var(--space-4) var(--space-6);
+    flex-wrap: wrap;
   }
 
   .nav-logo {
@@ -78,6 +96,45 @@ const navLinks = [
     color: var(--color-accent);
   }
 
+  /* Hamburger button — hidden on desktop */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-2);
+    cursor: pointer;
+    margin-left: auto;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .burger-line {
+    display: block;
+    width: 1.125rem;
+    height: 2px;
+    background: var(--color-text);
+    border-radius: 2px;
+    transition:
+      transform var(--transition-fast),
+      opacity var(--transition-fast);
+  }
+
+  /* Animated X when open */
+  .nav-toggle[aria-expanded='true'] .burger-line:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded='true'] .burger-line:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded='true'] .burger-line:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* Nav links */
   .nav-links {
     display: flex;
     gap: var(--space-1);
@@ -109,4 +166,71 @@ const navLinks = [
     gap: var(--space-2);
     margin-left: auto;
   }
+
+  /* Mobile */
+  @media (max-width: 640px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-controls {
+      margin-left: 0;
+      order: -1;
+      margin-left: auto;
+    }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      order: 10;
+      padding: var(--space-3) 0 var(--space-4);
+      border-top: 1px solid var(--color-border);
+      gap: var(--space-1);
+    }
+
+    .nav-links.nav-links--open {
+      display: flex;
+    }
+
+    .nav-link {
+      display: block;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-base);
+    }
+  }
 </style>
+
+<script>
+  const toggle = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+  const navLinks = document.getElementById('nav-links');
+
+  function close() {
+    if (!toggle) return;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', toggle.dataset.labelOpen ?? '');
+    navLinks?.classList.remove('nav-links--open');
+  }
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      close();
+    } else {
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', toggle.dataset.labelClose ?? '');
+      navLinks?.classList.add('nav-links--open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') close();
+  });
+
+  document.addEventListener('click', (e) => {
+    const target = e.target as Node;
+    if (!toggle?.contains(target) && !navLinks?.contains(target)) {
+      close();
+    }
+  });
+</script>

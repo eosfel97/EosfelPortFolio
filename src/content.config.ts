@@ -16,7 +16,7 @@ const projects = defineCollection({
       status: z.enum(['in-progress', 'completed', 'archived']),
       repoUrl: z.string().url(),
       liveUrl: z.string().url().optional(),
-      cover: image(),
+      cover: image().optional(),
     }),
 });
 

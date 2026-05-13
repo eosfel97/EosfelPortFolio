@@ -25,7 +25,14 @@
   },
   "cv": {
     "download": "Télécharger le CV (PDF)",
-    "downloadLabel": "Télécharger mon CV en PDF"
+    "downloadLabel": "Télécharger mon CV en PDF",
+    "title": "Curriculum Vitae",
+    "summary": "Résumé",
+    "skills": "Compétences",
+    "experience": "Expérience",
+    "education": "Formation",
+    "present": "présent",
+    "pdfNotice": "Ce CV est disponible en téléchargement au format PDF."
   },
   "contact": {
     "title": "Contact",

@@ -25,7 +25,14 @@
   },
   "cv": {
     "download": "Download Resume (PDF)",
-    "downloadLabel": "Download my resume as PDF"
+    "downloadLabel": "Download my resume as PDF",
+    "title": "Resume",
+    "summary": "Summary",
+    "skills": "Skills",
+    "experience": "Experience",
+    "education": "Education",
+    "present": "present",
+    "pdfNotice": "This resume is available for download as a PDF."
   },
   "contact": {
     "title": "Contact",

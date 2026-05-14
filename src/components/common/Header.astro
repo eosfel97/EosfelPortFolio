@@ -2,7 +2,6 @@
 import type { Locale } from '../../consts';
 import { useTranslations } from '../../i18n/utils';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import ThemeToggle from './ThemeToggle.astro';
 
 interface Props {
   lang: Locale;
@@ -58,7 +57,6 @@ const homeLabel = lang === 'fr' ? 'Any Gnahiet — Accueil' : 'Any Gnahiet — H
     </ul>
 
     <div class="nav-controls">
-      <ThemeToggle label={t('a11y.toggleTheme')} />
       <LanguageSwitcher currentLang={lang} pathname={pathname} label={t('a11y.switchLang')} />
     </div>
   </nav>

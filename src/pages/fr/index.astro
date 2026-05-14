@@ -1,157 +1,47 @@
 ---
-import { getCollection } from 'astro:content';
-import PageLayout from '../../layouts/PageLayout.astro';
-import ProjectCard from '../../components/projects/ProjectCard.astro';
-import { useTranslations } from '../../i18n/utils';
+import '../../styles/yamikage.css';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import KunaiCursor from '../../components/home/KunaiCursor.tsx';
+import YamikageChrome from '../../components/home/YamikageChrome.tsx';
+import Hero from '../../components/home/Hero.tsx';
+import Projects from '../../components/home/Projects.tsx';
+import Stack from '../../components/home/Stack.tsx';
+import Homelab from '../../components/home/Homelab.tsx';
+import Timeline from '../../components/home/Timeline.tsx';
+import Contact from '../../components/home/Contact.tsx';
 import { SITE_URL, SOCIAL_LINKS } from '../../consts';
+import { PORTFOLIO_DATA } from '../../data/portfolio';
 
 const lang = 'fr' as const;
-const t = useTranslations(lang);
-
-const allProjects = await getCollection('projects');
-const featured = allProjects
-  .filter((p) => p.id.startsWith('fr/') && p.data.featured)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
 
 const alternateUrls = [{ lang: 'en' as const, url: `${SITE_URL}/en` }];
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Any Gnahiet',
+  name: PORTFOLIO_DATA.identity.name,
   url: SITE_URL,
-  jobTitle: t('hero.subtitle'),
+  jobTitle: PORTFOLIO_DATA.identity.role.fr,
   sameAs: [SOCIAL_LINKS.github, SOCIAL_LINKS.linkedin],
 };
 ---
 
-<PageLayout
+<BaseLayout
   lang={lang}
   title="Accueil"
-  description="Portfolio de Any Gnahiet, développeur full-stack spécialisé en React, Spring Boot et React Native."
+  description="Portfolio de Any Gnahiet, développeur full-stack — React, Spring Boot, React Native."
   alternateUrls={alternateUrls}
   jsonLd={jsonLd}
 >
-  <div class="home">
-    <section class="hero" aria-labelledby="hero-title">
-      <h1 id="hero-title">{t('hero.title')}</h1>
-      <p class="subtitle">{t('hero.subtitle')}</p>
-      <div class="hero-actions">
-        <a href="/fr/projects" class="btn btn--primary">{t('hero.cta')}</a>
-        <a href="/fr/about" class="btn btn--secondary">En savoir plus</a>
-      </div>
-    </section>
+  <main id="main-content" class="v-yk2">
+    <KunaiCursor client:only="react" />
+    <YamikageChrome client:only="react" lang={lang} />
 
-    {
-      featured.length > 0 && (
-        <section class="featured-section" aria-labelledby="featured-title">
-          <h2 id="featured-title">Projets récents</h2>
-          <ul class="featured-grid" role="list">
-            {featured.map((project) => (
-              <li>
-                <ProjectCard
-                  title={project.data.title}
-                  description={project.data.description}
-                  slug={project.data.slug}
-                  techs={project.data.techs}
-                  status={project.data.status}
-                  featured={project.data.featured}
-                  repoUrl={project.data.repoUrl}
-                  liveUrl={project.data.liveUrl}
-                  lang={lang}
-                />
-              </li>
-            ))}
-          </ul>
-          <div class="all-projects-link">
-            <a href="/fr/projects" class="btn btn--secondary">
-              Voir tous les projets →
-            </a>
-          </div>
-        </section>
-      )
-    }
-  </div>
-</PageLayout>
-
-<style>
-  .home {
-    max-width: var(--max-width-content);
-    margin: 0 auto;
-    padding: 0 var(--space-6);
-  }
-  .hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    min-height: 60vh;
-    gap: var(--space-6);
-    padding: var(--space-16) 0;
-  }
-  h1 {
-    font-size: clamp(var(--text-3xl), 6vw, 4rem);
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-  }
-  .subtitle {
-    font-size: var(--text-xl);
-    color: var(--color-text-muted);
-    max-width: 40ch;
-  }
-  .hero-actions {
-    display: flex;
-    gap: var(--space-4);
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: var(--space-2);
-  }
-  .btn {
-    font-size: var(--text-sm);
-    font-weight: 600;
-    padding: var(--space-3) var(--space-8);
-    border-radius: var(--radius-md);
-    text-decoration: none;
-    transition: all var(--transition-fast);
-  }
-  .btn--primary {
-    background: var(--color-accent);
-    color: #fff;
-  }
-  .btn--primary:hover {
-    background: var(--color-accent-hover);
-    color: #fff;
-  }
-  .btn--secondary {
-    border: 1px solid var(--color-border);
-    color: var(--color-text);
-  }
-  .btn--secondary:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-  }
-  .featured-section {
-    padding: var(--space-16) 0;
-    border-top: 1px solid var(--color-border);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-8);
-  }
-  h2 {
-    font-size: var(--text-2xl);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-  .featured-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: var(--space-6);
-    list-style: none;
-  }
-  .all-projects-link {
-    display: flex;
-  }
-</style>
+    <Hero client:visible lang={lang} />
+    <Projects client:visible lang={lang} />
+    <Stack client:visible lang={lang} />
+    <Homelab client:visible lang={lang} />
+    <Timeline client:visible lang={lang} />
+    <Contact client:visible lang={lang} />
+  </main>
+</BaseLayout>

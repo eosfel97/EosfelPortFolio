@@ -1,8 +1,5 @@
 ---
-// Redirect to /fr or /en based on Accept-Language, fallback EN
-const acceptLang = Astro.request.headers.get('accept-language') ?? '';
-const prefersFr = acceptLang.toLowerCase().includes('fr');
-const target = prefersFr ? '/fr' : '/en';
-
-return Astro.redirect(target, 302);
+// Static fallback redirect to the x-default locale (EN).
+// Accept-Language negotiation is delegated to the reverse proxy (Caddy).
+return Astro.redirect('/en', 302);
 ---

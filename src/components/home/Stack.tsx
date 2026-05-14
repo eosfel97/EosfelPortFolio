@@ -1,0 +1,121 @@
+import type { Locale } from '../../consts';
+import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L } from '../../data/portfolio';
+import { C } from './colors';
+import { SHead } from './pieces';
+import { Reveal } from './shared';
+
+function StackList({ label, subk, items }: { label: string; subk: string; items: string[] }) {
+  return (
+    <div>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginBottom: 14 }}>
+        <span className="yk2-kanji" style={{ fontSize: 24, color: C.accent }}>
+          {subk}
+        </span>
+        <h3
+          className="yk2-display"
+          style={{ fontSize: 18, fontWeight: 600, color: C.ink, fontStyle: 'italic', margin: 0 }}
+        >
+          {label}
+        </h3>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+        {items.map((i) => (
+          <span key={i} className="yk2-tag" style={{ fontSize: 11 }}>
+            {i}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export default function Stack({ lang }: { lang: Locale }) {
+  const s = D.stack;
+  return (
+    <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
+      <SHead label={L.stack} lang={lang} n="03" cmd="stack --tree --all" />
+      <div
+        className="yk2-bgkanji"
+        aria-hidden
+        style={{ fontSize: 360, bottom: -60, left: -30, lineHeight: 0.85 }}
+      >
+        技
+      </div>
+
+      <div
+        className="yk2-lang-grid"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 14,
+          marginBottom: 36,
+        }}
+      >
+        {s.languages.map((l, i) => (
+          <Reveal key={l.name} delay={i * 60}>
+            <div className="yk2-card" style={{ padding: '20px 14px', textAlign: 'center' }}>
+              <div className="yk2-kanji" style={{ fontSize: 42, color: C.seal, lineHeight: 1 }}>
+                {l.kanji}
+              </div>
+              <div
+                className="yk2-display"
+                style={{ fontSize: 18, fontWeight: 700, marginTop: 8, color: C.ink }}
+              >
+                {l.name}
+              </div>
+              <div
+                className="yk2-mono"
+                style={{
+                  fontSize: 9,
+                  color: C.inkFaint,
+                  letterSpacing: '.15em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                · {l.el} ·
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 3, marginTop: 10 }}>
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <div
+                    key={n}
+                    style={{
+                      width: 7,
+                      height: 7,
+                      background: n <= l.level ? C.seal : 'transparent',
+                      border: `1px solid ${n <= l.level ? C.seal : C.line}`,
+                      transform: 'rotate(45deg)',
+                      transition: 'background .3s',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+
+      <div
+        className="yk2-stack-lists"
+        style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 24 }}
+      >
+        <Reveal kind="l">
+          <StackList
+            label={lang === 'fr' ? 'Infrastructure & DevOps' : 'Infrastructure & DevOps'}
+            subk="基"
+            items={s.infra}
+          />
+        </Reveal>
+        <Reveal kind="l" delay={120}>
+          <StackList
+            label={lang === 'fr' ? 'Front-end' : 'Front-end'}
+            subk="面"
+            items={s.frontend}
+          />
+        </Reveal>
+        <Reveal kind="r" delay={240}>
+          <StackList label={lang === 'fr' ? 'Back-end' : 'Back-end'} subk="骨" items={s.tools} />
+        </Reveal>
+      </div>
+    </section>
+  );
+}

@@ -1,6 +1,6 @@
-export const SITE_TITLE = 'Any Gnahiet — Développeur Full-Stack';
+export const SITE_TITLE = 'Any Gnahiet — Développeur web & mobile';
 export const SITE_DESCRIPTION =
-  'Portfolio de Any Gnahiet, développeur full-stack spécialisé en React, Spring Boot et React Native.';
+  'Portfolio de Any Gnahiet, développeur web & mobile full-stack — Java/Spring Boot, React, React Native, Linux & self-hosting.';
 export const SITE_URL = 'https://anygnahiet.dev';
 
 export const SOCIAL_LINKS = {

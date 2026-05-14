@@ -1,18 +1,33 @@
-/* Design tokens — couleurs, espacements, typographie */
+/* Design tokens — Yamikage (dark-only ink/ninja theme) */
 
 :root {
-  /* Colors — light theme */
-  --color-bg: #ffffff;
-  --color-bg-subtle: #f8f9fa;
-  --color-text: #1a1a2e;
-  --color-text-muted: #6c757d;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-border: #e2e8f0;
+  /* Palette */
+  --yk-bg: #0e0d09;
+  --yk-bg-rise: #161410;
+  --yk-bg-panel: #1d1c17;
+  --yk-ink: #ece0c4;
+  --yk-ink-soft: #a89878;
+  --yk-ink-faint: #5e5444;
+  --yk-line: #332e25;
+  --yk-seal: #d63838;
+  --yk-seal-glow: #ff5050;
+  --yk-accent: #d4a838;
+  --yk-green: #9ad48c;
+
+  /* Semantic aliases — consumed by the non-Yamikage pages (cv, blog, projects…) */
+  --color-bg: var(--yk-bg);
+  --color-bg-subtle: var(--yk-bg-rise);
+  --color-text: var(--yk-ink);
+  --color-text-muted: var(--yk-ink-soft);
+  --color-accent: var(--yk-seal);
+  --color-accent-hover: var(--yk-seal-glow);
+  --color-border: var(--yk-line);
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Shippori Mincho', serif;
+  --font-italic: 'Cormorant Garamond', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: var(--font-mono);
 
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -54,15 +69,4 @@
     --transition-fast: 0ms;
     --transition-base: 0ms;
   }
-}
-
-/* Dark theme */
-[data-theme='dark'] {
-  --color-bg: #0f172a;
-  --color-bg-subtle: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-muted: #94a3b8;
-  --color-accent: #60a5fa;
-  --color-accent-hover: #93c5fd;
-  --color-border: #334155;
 }

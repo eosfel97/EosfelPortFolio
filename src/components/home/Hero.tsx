@@ -1,7 +1,7 @@
 import type { Locale } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
-import { Logo, LangSwitch, Seal } from './pieces';
+import { Logo, LangSwitch } from './pieces';
 import { ParallaxKanji, Reveal, Typewriter } from './shared';
 
 export default function Hero({ lang }: { lang: Locale }) {
@@ -180,13 +180,11 @@ export default function Hero({ lang }: { lang: Locale }) {
         </Reveal>
       </div>
 
-      <Seal
-        kanji="忍"
-        romaji="NIN · MMXXVI"
-        size={140}
+      <Logo
+        size={150}
         pulse
         className="yk2-hero-bigseal"
-        style={{ position: 'absolute', top: 110, right: 130, transform: 'rotate(-7deg)' }}
+        style={{ position: 'absolute', top: 104, right: 124 }}
       />
 
       <div

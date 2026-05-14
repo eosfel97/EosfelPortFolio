@@ -47,16 +47,23 @@ export function Logo({
   pulse,
   hover = true,
   style,
+  className = '',
 }: {
   size?: number;
   pulse?: boolean;
   hover?: boolean;
   style?: CSSProperties;
+  className?: string;
 }) {
   return (
     <div
       aria-hidden
-      className={'yk2-logo' + (pulse ? ' yk2-logo-pulse' : '') + (hover ? ' yk2-logo-hover' : '')}
+      className={
+        'yk2-logo' +
+        (pulse ? ' yk2-logo-pulse' : '') +
+        (hover ? ' yk2-logo-hover' : '') +
+        (className ? ' ' + className : '')
+      }
       style={{
         width: size,
         height: size,

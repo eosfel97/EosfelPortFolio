@@ -4,7 +4,7 @@ export const SITE_DESCRIPTION =
 export const SITE_URL = 'https://anygnahiet.dev';
 
 export const SOCIAL_LINKS = {
-  github: 'https://github.com/anygnahiet',
+  github: 'https://github.com/eosfel97',
   linkedin: 'https://linkedin.com/in/anygnahiet',
 } as const;
 

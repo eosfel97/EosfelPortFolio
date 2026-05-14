@@ -275,7 +275,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
     fr: 'Ouvert aux opportunités en développement web & mobile, en alternance comme en CDI. On peut aussi juste parler self-hosting et serveurs Debian.',
     en: 'Open to web & mobile development opportunities, work-study or full-time. Also happy to just talk self-hosting and Debian servers.',
     links: [
-      { label: 'GitHub', value: 'github.com/anygnahiet', href: 'https://github.com/anygnahiet' },
+      { label: 'GitHub', value: 'github.com/eosfel97', href: 'https://github.com/eosfel97' },
       { label: 'Email', value: 'any.gouba@gmail.com', href: 'mailto:any.gouba@gmail.com' },
       {
         label: 'LinkedIn',

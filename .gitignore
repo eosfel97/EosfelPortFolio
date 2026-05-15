@@ -23,3 +23,11 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+
+# Local-only deployment artefacts
+Dockerfile
+compose.yml
+docker-compose.yml
+docker-compose.*.yml
+nginx.conf
+.dockerignore

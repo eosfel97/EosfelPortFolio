@@ -2,7 +2,7 @@
 
 Portfolio personnel de Any Gnahiet, développeur full-stack.
 
-Construit avec [Astro](https://astro.build) · Déployé sur Megalaudon via Docker + Caddy + Cloudflare Tunnel.
+Construit avec [Astro](https://astro.build).
 
 ## Stack
 
@@ -36,7 +36,3 @@ Le serveur démarre sur `http://localhost:4321`.
 ## Conventions
 
 Commits au format [Conventional Commits](https://www.conventionalcommits.org/).
-
-## Déploiement
-
-Build statique servi via une image Docker `nginx:alpine` derrière Caddy sur Megalaudon.

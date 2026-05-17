@@ -46,7 +46,7 @@ function Embers() {
   );
 }
 
-function ScrollProgress({ lang }: { lang: Locale }) {
+function ScrollProgress() {
   const [p, setP] = useState(0);
   useEffect(() => {
     const onScroll = () => {
@@ -59,7 +59,7 @@ function ScrollProgress({ lang }: { lang: Locale }) {
   }, []);
   return (
     <div className="yk2-progress" aria-hidden>
-      <div className="yk2-progress-label">{lang === 'fr' ? '巻物' : 'SCROLL'}</div>
+      <div className="yk2-progress-label">SCROLL</div>
       <div className="yk2-progress-track">
         <div className="yk2-progress-fill" style={{ height: p * 100 + '%' }} />
       </div>
@@ -191,7 +191,7 @@ export default function YamikageChrome({ lang }: { lang: Locale }) {
   return (
     <>
       <Embers />
-      <ScrollProgress lang={lang} />
+      <ScrollProgress />
 
       {eggOn ? (
         <div
@@ -214,16 +214,19 @@ export default function YamikageChrome({ lang }: { lang: Locale }) {
           }}
         >
           <div
-            className="yk2-kanji yk2-pulse"
+            className="yk2-display yk2-pulse"
             style={{
-              fontSize: 420,
+              fontSize: 320,
               color: C.seal,
               lineHeight: 0.9,
+              fontWeight: 700,
+              fontStyle: 'italic',
+              letterSpacing: '-0.04em',
               animation:
                 'yk2EggBlast 1s cubic-bezier(.2,.7,.3,1) both, yk2Pulse 2.6s ease-in-out 1s infinite',
             }}
           >
-            影
+            AG
           </div>
           <div className="yk2-italic" style={{ color: C.ink, fontSize: 34, marginTop: 18 }}>
             {lang === 'fr'
@@ -239,7 +242,8 @@ export default function YamikageChrome({ lang }: { lang: Locale }) {
               letterSpacing: '.3em',
             }}
           >
-            ⟢ KONAMI · CLIC · OU SCEAU CLIQUÉ — CLIQUEZ POUR FERMER ⟣
+            ⟢ KONAMI · CLICK · OR LOGO CLICK —{' '}
+            {lang === 'fr' ? 'CLIQUEZ POUR FERMER' : 'CLICK TO CLOSE'} ⟣
           </div>
         </div>
       ) : null}

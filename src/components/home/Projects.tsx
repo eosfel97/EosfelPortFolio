@@ -23,14 +23,27 @@ export default function Projects({ lang }: { lang: Locale }) {
               }}
             >
               <div style={{ textAlign: 'center' }}>
-                <div className="yk2-kanji" style={{ fontSize: 86, color: C.seal, lineHeight: 1 }}>
-                  {p.kanji}
-                </div>
                 <div
                   className="yk2-mono"
-                  style={{ fontSize: 10, color: C.inkFaint, marginTop: 6, letterSpacing: '.2em' }}
+                  style={{
+                    fontSize: 11,
+                    color: C.inkFaint,
+                    letterSpacing: '.3em',
+                  }}
                 >
-                  NO.0{i + 1}
+                  PROJECT
+                </div>
+                <div
+                  className="yk2-display"
+                  style={{
+                    fontSize: 72,
+                    color: C.seal,
+                    lineHeight: 1,
+                    fontWeight: 700,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  0{i + 1}
                 </div>
               </div>
 

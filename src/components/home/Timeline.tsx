@@ -49,19 +49,17 @@ export default function Timeline({ lang }: { lang: Locale }) {
                     boxShadow: `0 0 12px rgba(255,80,80,.6), inset 0 0 0 2px ${C.bg}`,
                   }}
                 />
-                <div>
-                  <div
-                    className="yk2-mono"
-                    style={{ fontSize: 11, color: C.accent, letterSpacing: '.2em' }}
-                  >
-                    {tm.year}
-                  </div>
-                  <div
-                    className="yk2-kanji"
-                    style={{ fontSize: 36, color: C.seal, lineHeight: 1, marginTop: 2 }}
-                  >
-                    {tm.kanji}
-                  </div>
+                <div
+                  className="yk2-display"
+                  style={{
+                    fontSize: 28,
+                    fontWeight: 700,
+                    color: C.seal,
+                    lineHeight: 1,
+                    letterSpacing: '-0.01em',
+                  }}
+                >
+                  {tm.year}
                 </div>
                 <div className="yk2-italic" style={{ fontSize: 17, lineHeight: 1.4, color: C.ink }}>
                   {pickLang(tm.t, lang)}

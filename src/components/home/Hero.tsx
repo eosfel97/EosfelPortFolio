@@ -19,21 +19,6 @@ export default function Hero({ lang }: { lang: Locale }) {
         justifyContent: 'center',
       }}
     >
-      <div
-        className="yk2-vkanji"
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: 90,
-          right: 80,
-          fontSize: 18,
-          color: C.inkFaint,
-          height: 460,
-        }}
-      >
-        影 · 開発 · 鋼 · 道 · 忍
-      </div>
-
       <Reveal>
         <div
           className="yk2-header"
@@ -78,8 +63,7 @@ export default function Hero({ lang }: { lang: Locale }) {
             animationDelay: '0ms',
           }}
         >
-          ⟢ {lang === 'fr' ? 'IDENTITÉ — 序章 · CHAPITRE PREMIER' : 'IDENTITY — 序章 · CHAPTER ONE'}{' '}
-          ⟣
+          ⟢ {lang === 'fr' ? 'IDENTITÉ · CHAPITRE PREMIER' : 'IDENTITY · CHAPTER ONE'} ⟣
         </div>
         <h1
           className="yk2-display"

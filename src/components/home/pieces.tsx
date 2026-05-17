@@ -1,4 +1,4 @@
-// Composite UI pieces shared across Yamikage sections.
+// Composite UI pieces shared across sections.
 
 import type { CSSProperties } from 'react';
 
@@ -6,40 +6,6 @@ import type { Locale } from '../../consts';
 import { pickLang, type SectionLabel } from '../../data/portfolio';
 import { C } from './colors';
 import { BrushStroke, Reveal } from './shared';
-
-/** Circular wax-seal badge. */
-export function Seal({
-  kanji,
-  romaji,
-  size = 84,
-  pulse,
-  style,
-  className = '',
-}: {
-  kanji: string;
-  romaji?: string;
-  size?: number;
-  pulse?: boolean;
-  style?: CSSProperties;
-  className?: string;
-}) {
-  return (
-    <div
-      className={'yk2-seal' + (pulse ? ' yk2-pulse' : '') + (className ? ' ' + className : '')}
-      style={{ width: size, height: size, ...style }}
-    >
-      <div style={{ fontSize: size * 0.36 }}>{kanji}</div>
-      {romaji ? (
-        <div
-          className="yk2-mono"
-          style={{ fontSize: 7.5, letterSpacing: '.18em', opacity: 0.85, marginTop: 2 }}
-        >
-          {romaji}
-        </div>
-      ) : null}
-    </div>
-  );
-}
 
 /** Brand logo — circular PNG emblem. */
 export function Logo({
@@ -91,7 +57,7 @@ export function LangSwitch({ lang }: { lang: Locale }) {
   );
 }
 
-/** Section heading with kanji, romaji index and a shell-style command. */
+/** Section heading: index, title, shell-style command. */
 export function SHead({
   label,
   lang,
@@ -106,8 +72,17 @@ export function SHead({
   return (
     <Reveal>
       <div className="yk2-shead" style={{ marginBottom: 30 }}>
-        <div className="yk2-kanji" style={{ fontSize: 50, lineHeight: 1, color: C.seal }}>
-          {label.kanji}
+        <div
+          className="yk2-display"
+          style={{
+            fontSize: 36,
+            fontWeight: 700,
+            lineHeight: 1,
+            color: C.seal,
+            letterSpacing: '0.04em',
+          }}
+        >
+          §{n}
         </div>
         <div style={{ flex: 1 }}>
           <div
@@ -119,7 +94,7 @@ export function SHead({
               textTransform: 'uppercase',
             }}
           >
-            // section · {n} · {label.romaji}
+            // section · {n}
           </div>
           <h2
             className="yk2-display"

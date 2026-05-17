@@ -1,7 +1,6 @@
-// Persona + content for the Yamikage single-page portfolio.
-// Real content — Any Gnahiet (anygnahiet.dev). The Japanese visual elements
-// (section labels, seals, decorative kanji within sections) are kept as a
-// design choice; no identity-level kanji label.
+// Content for the single-page portfolio.
+// Real content — Any Gnahiet (anygnahiet.dev). Dark editorial theme with
+// red seal accents; all Japanese characters removed.
 
 import type { Locale } from '../consts';
 
@@ -19,7 +18,6 @@ export interface Identity {
 
 export interface Project {
   id: string;
-  kanji: string;
   name: string;
   meta: Localized;
   blurb: Localized;
@@ -33,7 +31,6 @@ export interface Project {
 export interface Language {
   name: string;
   level: number;
-  kanji: string;
   el: string;
 }
 
@@ -56,7 +53,6 @@ export interface Homelab {
 
 export interface TimelineEntry {
   year: string;
-  kanji: string;
   t: Localized;
 }
 
@@ -70,10 +66,7 @@ export interface Contact extends Localized {
   links: ContactLink[];
 }
 
-export interface SectionLabel extends Localized {
-  kanji: string;
-  romaji: string;
-}
+export type SectionLabel = Localized;
 
 export interface PortfolioData {
   identity: Identity;
@@ -111,7 +104,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
   projects: [
     {
       id: 'megalaudon',
-      kanji: '砦',
       name: 'Megalaudon',
       meta: { fr: 'Serveur auto-hébergé · Debian', en: 'Self-hosted server · Debian' },
       blurb: {
@@ -124,7 +116,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       id: 'portfolio',
-      kanji: '札',
       name: 'anygnahiet.dev',
       meta: { fr: 'Portfolio · Astro', en: 'Portfolio · Astro' },
       blurb: {
@@ -140,12 +131,12 @@ export const PORTFOLIO_DATA: PortfolioData = {
 
   stack: {
     languages: [
-      { name: 'JavaScript', level: 4, kanji: '雷', el: 'thunder' },
-      { name: 'TypeScript', level: 4, kanji: '鋼', el: 'metal' },
-      { name: 'Java', level: 3, kanji: '火', el: 'fire' },
-      { name: 'HTML / CSS', level: 4, kanji: '型', el: 'form' },
-      { name: 'SQL', level: 3, kanji: '水', el: 'water' },
-      { name: 'Linux', level: 3, kanji: '岩', el: 'stone' },
+      { name: 'JavaScript', level: 4, el: 'thunder' },
+      { name: 'TypeScript', level: 4, el: 'metal' },
+      { name: 'Java', level: 3, el: 'fire' },
+      { name: 'HTML / CSS', level: 4, el: 'form' },
+      { name: 'SQL', level: 3, el: 'water' },
+      { name: 'Linux', level: 3, el: 'stone' },
     ],
     infra: [
       'Linux (Debian)',
@@ -204,7 +195,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
   timeline: [
     {
       year: '2017',
-      kanji: '始',
       t: {
         fr: 'Baccalauréat STL — sciences physiques en laboratoire',
         en: 'STL baccalaureate — physics & lab sciences',
@@ -212,7 +202,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2019',
-      kanji: '学',
       t: {
         fr: 'BTS techniques physiques pour l’industrie et le laboratoire',
         en: 'Technical diploma — physics for industry & lab',
@@ -220,7 +209,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2021',
-      kanji: '盾',
       t: {
         fr: 'Formation sécurité informatique (OpenClassrooms)',
         en: 'Cybersecurity training (OpenClassrooms)',
@@ -228,7 +216,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2022',
-      kanji: '創',
       t: {
         fr: 'Développeur web & web mobile — Philiance, premier stage',
         en: 'Web & mobile developer — Philiance, first internship',
@@ -236,7 +223,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2023',
-      kanji: '築',
       t: {
         fr: 'Concepteur développeur d’applications — GRETA',
         en: 'Application designer-developer — GRETA',
@@ -244,12 +230,10 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2024',
-      kanji: '道',
       t: { fr: 'Préparateur vendeur — Micromania', en: 'Sales associate — Micromania' },
     },
     {
       year: '2025',
-      kanji: '採',
       t: {
         fr: 'Licence pro systèmes d’information (CNAM) · stage HDMNetwork',
         en: 'Bachelor in information systems (CNAM) · HDMNetwork internship',
@@ -257,7 +241,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
     },
     {
       year: '2026',
-      kanji: '進',
       t: {
         fr: 'Lancement du serveur Megalaudon · révision LFCS',
         en: 'Megalaudon server launch · studying for LFCS',
@@ -284,12 +267,12 @@ export const PORTFOLIO_LABELS: Record<
   'hero' | 'projects' | 'stack' | 'homelab' | 'timeline' | 'contact',
   SectionLabel
 > = {
-  hero: { fr: 'introduction', en: 'introduction', kanji: '序', romaji: 'jo' },
-  projects: { fr: 'projets', en: 'work', kanji: '作', romaji: 'saku' },
-  stack: { fr: 'techniques', en: 'craft', kanji: '技', romaji: 'waza' },
-  homelab: { fr: 'le sanctuaire', en: 'the fortress', kanji: '城', romaji: 'shiro' },
-  timeline: { fr: 'parcours', en: 'path', kanji: '道', romaji: 'do' },
-  contact: { fr: 'contact', en: 'contact', kanji: '結', romaji: 'musubi' },
+  hero: { fr: 'introduction', en: 'introduction' },
+  projects: { fr: 'projets', en: 'work' },
+  stack: { fr: 'techniques', en: 'craft' },
+  homelab: { fr: 'le sanctuaire', en: 'the fortress' },
+  timeline: { fr: 'parcours', en: 'path' },
+  contact: { fr: 'contact', en: 'contact' },
 };
 
 /** Pick the FR or EN variant of a localized value (or pass through a plain string). */

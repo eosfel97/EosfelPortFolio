@@ -1,64 +1,8 @@
-import { useEffect, useMemo, useState } from 'react';
-
 import type { Locale } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { EGG_EVENT } from './YamikageChrome';
 import { LetterReveal, Reveal } from './shared';
-
-const DRIFT_CHARS = ['結', '影', '忍', '道', '心', '光', '夢', '志', '巻', '技', '陣'];
-
-/** Atmospheric kanji drifting upward. Client-only to avoid hydration mismatch. */
-function FloatingKanji() {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const items = useMemo(
-    () =>
-      Array.from({ length: 16 }).map((_, i) => ({
-        ch: DRIFT_CHARS[i % DRIFT_CHARS.length],
-        left: Math.random() * 100,
-        delay: Math.random() * 16,
-        duration: 22 + Math.random() * 18,
-        size: 26 + Math.random() * 56,
-        op: 0.04 + Math.random() * 0.07,
-        dx: (Math.random() - 0.5) * 120,
-        rot: (Math.random() - 0.5) * 60 + 'deg',
-        red: Math.random() > 0.55,
-      })),
-    [],
-  );
-
-  if (!mounted) return null;
-
-  return (
-    <div
-      aria-hidden
-      style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}
-    >
-      {items.map((it, i) => (
-        <span
-          key={i}
-          className="yk2-kdrift"
-          style={
-            {
-              left: it.left + '%',
-              fontSize: it.size,
-              color: it.red ? C.seal : C.ink,
-              '--dur': it.duration + 's',
-              '--delay': it.delay + 's',
-              '--dx': it.dx + 'px',
-              '--rot': it.rot,
-              '--op': it.op,
-            } as React.CSSProperties
-          }
-        >
-          {it.ch}
-        </span>
-      ))}
-    </div>
-  );
-}
 
 export default function Contact({ lang }: { lang: Locale }) {
   const c = D.contact;
@@ -77,16 +21,6 @@ export default function Contact({ lang }: { lang: Locale }) {
         minHeight: 760,
       }}
     >
-      <FloatingKanji />
-
-      <div
-        className="yk2-bgkanji red"
-        aria-hidden
-        style={{ fontSize: 540, bottom: -140, right: -100, lineHeight: 0.85 }}
-      >
-        結
-      </div>
-
       <div
         className="yk2-contact-grid"
         style={{
@@ -109,8 +43,8 @@ export default function Contact({ lang }: { lang: Locale }) {
                 marginBottom: 18,
               }}
             >
-              <span className="yk2-prompt">⟩</span> § 06 · MUSUBI —{' '}
-              {lang === 'fr' ? 'NOUER LE LIEN' : 'TYING THE KNOT'}
+              <span className="yk2-prompt">⟩</span> § 06 ·{' '}
+              {lang === 'fr' ? 'PRENONS CONTACT' : 'GET IN TOUCH'}
             </div>
           </Reveal>
 
@@ -255,7 +189,6 @@ export default function Contact({ lang }: { lang: Locale }) {
                 const angle = (i / 24) * Math.PI * 2;
                 const r1 = 158;
                 const r2 = i % 6 === 0 ? 168 : 163;
-                // Round to keep SSR and client markup byte-identical (no hydration mismatch).
                 const round = (n: number) => Math.round(n * 100) / 100;
                 return (
                   <line
@@ -271,25 +204,6 @@ export default function Contact({ lang }: { lang: Locale }) {
                 );
               })}
             </svg>
-
-            <div className="yk2-orbit yk2-spin-slow" style={{ pointerEvents: 'none' }} aria-hidden>
-              {['結', '忍', '影', '道'].map((k, i) => {
-                const ang = (i / 4) * 360 - 90;
-                return (
-                  <span
-                    key={k}
-                    className="yk2-kanji-orbit"
-                    style={{
-                      left: '50%',
-                      top: '50%',
-                      transform: `rotate(${ang}deg) translate(150px) rotate(${-ang}deg) translate(-50%, -50%)`,
-                    }}
-                  >
-                    {k}
-                  </span>
-                );
-              })}
-            </div>
 
             <div
               className="yk2-big-logo"
@@ -348,7 +262,7 @@ export default function Contact({ lang }: { lang: Locale }) {
             className="yk2-mono"
             style={{ fontSize: 10, color: C.inkFaint, letterSpacing: '.2em' }}
           >
-            BUILT WITH RUST · DOCKER · TOO MUCH COFFEE
+            BUILT WITH ASTRO · TYPESCRIPT · TOO MUCH COFFEE
           </div>
         </div>
       </Reveal>

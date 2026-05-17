@@ -36,3 +36,4 @@ Le serveur démarre sur `http://localhost:4321`.
 ## Conventions
 
 Commits au format [Conventional Commits](https://www.conventionalcommits.org/).
+test d'auto déploy

@@ -1,7 +1,7 @@
 // Persona + content for the Yamikage single-page portfolio.
-// Real content — Any Gnahiet (anygnahiet.dev). The Japanese persona styling
-// is kept as a deliberate aesthetic choice; the kanji handle (匠 / takumi) is
-// decorative and can be tweaked freely.
+// Real content — Any Gnahiet (anygnahiet.dev). The Japanese visual elements
+// (section labels, seals, decorative kanji within sections) are kept as a
+// design choice; no identity-level kanji label.
 
 import type { Locale } from '../consts';
 
@@ -11,9 +11,6 @@ export type Localized<T = string> = Record<Locale, T>;
 export interface Identity {
   name: string;
   handle: string;
-  kanji: string;
-  kanjiRomaji: string;
-  kanjiMeaning: Localized;
   location: Localized;
   role: Localized;
   tagline: Localized;
@@ -96,9 +93,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
   identity: {
     name: 'Any Gnahiet',
     handle: 'anygnahiet',
-    kanji: '匠',
-    kanjiRomaji: 'takumi',
-    kanjiMeaning: { fr: 'artisan', en: 'craftsman' },
     location: { fr: 'Épinay-sur-Seine, France', en: 'Épinay-sur-Seine, France' },
     role: {
       fr: 'Développeur web & mobile · full-stack',

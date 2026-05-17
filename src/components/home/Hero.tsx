@@ -2,7 +2,7 @@ import type { Locale } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { Logo, LangSwitch } from './pieces';
-import { ParallaxKanji, Reveal, Typewriter } from './shared';
+import { Reveal, Typewriter } from './shared';
 
 export default function Hero({ lang }: { lang: Locale }) {
   const id = D.identity;
@@ -19,18 +19,6 @@ export default function Hero({ lang }: { lang: Locale }) {
         justifyContent: 'center',
       }}
     >
-      <ParallaxKanji
-        strength={18}
-        style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-      >
-        <div
-          className="yk2-bgkanji red yk2-float"
-          style={{ fontSize: 680, top: -160, right: -100, lineHeight: 0.85 }}
-        >
-          {id.kanji}
-        </div>
-      </ParallaxKanji>
-
       <div
         className="yk2-vkanji"
         aria-hidden
@@ -114,25 +102,6 @@ export default function Hero({ lang }: { lang: Locale }) {
             {lastName}
           </span>
         </h1>
-
-        <div
-          className="yk2-hero-line yk2-hero-meta"
-          style={{
-            marginTop: 18,
-            display: 'flex',
-            alignItems: 'baseline',
-            gap: 14,
-            flexWrap: 'wrap',
-            animationDelay: '720ms',
-          }}
-        >
-          <span className="yk2-kanji" style={{ fontSize: 32, color: C.accent }}>
-            {id.kanji}
-          </span>
-          <span className="yk2-italic" style={{ fontSize: 20, color: C.inkSoft }}>
-            ({id.kanjiRomaji}) — {pickLang(id.kanjiMeaning, lang)}
-          </span>
-        </div>
 
         <div
           className="yk2-display yk2-hero-line yk2-hero-tagline"

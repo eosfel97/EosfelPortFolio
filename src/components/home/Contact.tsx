@@ -342,7 +342,7 @@ export default function Contact({ lang }: { lang: Locale }) {
             className="yk2-mono"
             style={{ fontSize: 10, color: C.inkFaint, letterSpacing: '.2em' }}
           >
-            © 2026 · {D.identity.name} · {D.identity.kanji}
+            © 2026 · {D.identity.name}
           </div>
           <div
             className="yk2-mono"

@@ -9,13 +9,10 @@ export default defineConfig({
   integrations: [
     react(),
     sitemap({
-      // Exclude the root redirect page and the empty/placeholder routes from
-      // the sitemap (they are noindex; including them only confuses crawlers).
+      // Exclude the noindex '/' redirect page from the sitemap.
       filter: (page) => {
         const p = page.replace('https://anygnahiet.dev', '');
-        if (p === '/' || p === '') return false;
-        if (/^\/(fr|en)\/(blog|projects)\/?$/.test(p)) return false;
-        return true;
+        return p !== '/' && p !== '';
       },
       i18n: {
         defaultLocale: 'en',

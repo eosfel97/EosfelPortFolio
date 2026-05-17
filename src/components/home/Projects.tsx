@@ -107,21 +107,35 @@ export default function Projects({ lang }: { lang: Locale }) {
                     <span className="yk2-str">{p.stack.length}</span>
                   </div>
                 </div>
-                <a
-                  href={p.liveUrl ?? `/${lang}/projects`}
-                  className="yk2-mono yk2-link"
-                  style={{
-                    fontSize: 11,
-                    color: C.seal,
-                    marginTop: 14,
-                    letterSpacing: '.1em',
-                    display: 'inline-block',
-                  }}
-                  {...(p.liveUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
-                >
-                  <span className="yk2-prompt">$</span>{' '}
-                  {p.liveUrl ? `open ${p.name}` : `cd ./${p.id}`} →
-                </a>
+                {p.liveUrl ? (
+                  <a
+                    href={p.liveUrl}
+                    className="yk2-mono yk2-link"
+                    style={{
+                      fontSize: 11,
+                      color: C.seal,
+                      marginTop: 14,
+                      letterSpacing: '.1em',
+                      display: 'inline-block',
+                    }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="yk2-prompt">$</span> open {p.name} →
+                  </a>
+                ) : (
+                  <div
+                    className="yk2-mono"
+                    style={{
+                      fontSize: 11,
+                      color: C.inkFaint,
+                      marginTop: 14,
+                      letterSpacing: '.1em',
+                    }}
+                  >
+                    <span className="yk2-cmt">// private — no public URL</span>
+                  </div>
+                )}
               </div>
             </div>
           </Reveal>

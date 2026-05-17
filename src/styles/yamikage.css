@@ -10,7 +10,10 @@
   overflow-x: hidden;
   min-height: 100vh;
 }
-.v-yk2 * {
+/* Native cursor stays visible until the kunai island is mounted — avoids
+   a brief moment with no cursor at all. */
+body.kunai-ready .v-yk2,
+body.kunai-ready .v-yk2 * {
   cursor: none !important;
 }
 

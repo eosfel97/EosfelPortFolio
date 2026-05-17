@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
-/** Observe whether an element is in the viewport. */
+/** Observe whether an element has been in the viewport at least once.
+ *  Play-once semantics: once seen, the flag stays true (no flash on scroll-up). */
 export function useInView<T extends HTMLElement = HTMLDivElement>(
   options: IntersectionObserverInit = { threshold: 0.12 },
 ): [React.RefObject<T | null>, boolean] {
@@ -12,7 +13,10 @@ export function useInView<T extends HTMLElement = HTMLDivElement>(
     const node = ref.current;
     if (!node) return;
     const io = new IntersectionObserver(([entry]) => {
-      setSeen(entry.isIntersecting);
+      if (entry.isIntersecting) {
+        setSeen(true);
+        io.disconnect();
+      }
     }, options);
     io.observe(node);
     return () => io.disconnect();

@@ -11,6 +11,7 @@ interface Props {
   ogImage?: string;
   alternateUrls?: { lang: Locale; url: string }[];
   jsonLd?: Record<string, unknown>;
+  noindex?: boolean;
 }
 
 const {
@@ -21,9 +22,13 @@ const {
   ogImage = `${SITE_URL}/og-default.png`,
   alternateUrls = [],
   jsonLd,
+  noindex = false,
 } = Astro.props;
 
 const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
+
+// Escape '</' so JSON-LD payload can't break out of the <script> tag.
+const jsonLdSerialized = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';
 ---
 
 <!doctype html>
@@ -36,6 +41,7 @@ const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Any Gnahiet" />
+    {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Open Graph -->
@@ -69,7 +75,7 @@ const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <!-- JSON-LD structured data -->
-    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+    {jsonLd && <script type="application/ld+json" set:html={jsonLdSerialized} />}
   </head>
   <body>
     <a class="skip-link" href="#main-content">

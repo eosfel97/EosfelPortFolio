@@ -23,6 +23,10 @@ export default function KunaiCursor() {
     let currentA = -135;
     let raf = 0;
 
+    // Hide native cursor only once the kunai is ready, to avoid a flicker
+    // where the user has no cursor at all during the first frames.
+    document.body.classList.add('kunai-ready');
+
     const onMove = (e: MouseEvent) => {
       tx = e.clientX;
       ty = e.clientY;
@@ -79,6 +83,7 @@ export default function KunaiCursor() {
       document.removeEventListener('mouseleave', onLeave);
       document.removeEventListener('mouseenter', onEnter);
       cancelAnimationFrame(raf);
+      document.body.classList.remove('kunai-ready');
     };
   }, []);
 

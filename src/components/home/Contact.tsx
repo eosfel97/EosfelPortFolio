@@ -4,6 +4,10 @@ import { C } from './colors';
 import { EGG_EVENT } from './YamikageChrome';
 import { LetterReveal, Reveal } from './shared';
 
+/** Allow only http(s)/mailto/tel URLs; falls back to '#' otherwise. */
+const SAFE_SCHEMES = /^(https?:|mailto:|tel:)/i;
+const safeHref = (url: string): string => (SAFE_SCHEMES.test(url) ? url : '#');
+
 export default function Contact({ lang }: { lang: Locale }) {
   const c = D.contact;
   const email = c.links.find((l) => l.label === 'Email')?.value ?? '';
@@ -115,7 +119,7 @@ export default function Contact({ lang }: { lang: Locale }) {
             {c.links.map((l, i) => (
               <Reveal key={l.label} delay={i * 100}>
                 <a
-                  href={l.href}
+                  href={safeHref(l.href)}
                   className="yk2-contact-link"
                   rel="noopener noreferrer"
                   target="_blank"

@@ -7,7 +7,7 @@ export const C = {
   bgPanel: '#1d1c17',
   ink: '#ece0c4',
   inkSoft: '#a89878',
-  inkFaint: '#5e5444',
+  inkFaint: '#8a7e6a',
   line: '#332e25',
   seal: '#d63838',
   sealGlow: '#ff5050',

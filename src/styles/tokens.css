@@ -7,7 +7,8 @@
   --yk-bg-panel: #1d1c17;
   --yk-ink: #ece0c4;
   --yk-ink-soft: #a89878;
-  --yk-ink-faint: #5e5444;
+  /* WCAG AA-compliant against --yk-bg (~4.6:1) */
+  --yk-ink-faint: #8a7e6a;
   --yk-line: #332e25;
   --yk-seal: #d63838;
   --yk-seal-glow: #ff5050;

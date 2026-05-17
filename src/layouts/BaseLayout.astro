@@ -2,6 +2,8 @@
 import '../styles/global.css';
 import { SITE_TITLE, SITE_URL } from '../consts';
 import type { Locale } from '../consts';
+// Preloaded so the LCP h1/h2 don't wait for the CSS @font-face discovery.
+import shippori700Url from '@fontsource/shippori-mincho/files/shippori-mincho-latin-700-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -67,6 +69,9 @@ const jsonLdSerialized = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c'
     <!-- hreflang -->
     {alternateUrls.map(({ lang: l, url }) => <link rel="alternate" hreflang={l} href={url} />)}
     <link rel="alternate" hreflang="x-default" href={`${SITE_URL}/en`} />
+
+    <!-- Preload the LCP font (avoids FOIT on the h1/h2 display) -->
+    <link rel="preload" href={shippori700Url} as="font" type="font/woff2" crossorigin />
 
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

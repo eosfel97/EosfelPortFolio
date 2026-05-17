@@ -1,27 +1,14 @@
-/* Self-hosted fonts via @fontsource — no Google Fonts CDN. */
+/* Self-hosted fonts via @fontsource (variable where available).
+   3 families, 4 files total instead of ~20 weighted files. */
 
-/* Shippori Mincho — display headings (Latin only, no Japanese glyphs used) */
+/* Shippori Mincho — display headings (no variable version available).
+   Only the two weights actually used: 400 (section h2) and 700 (h1, h3). */
 @import '@fontsource/shippori-mincho/latin-400.css';
-@import '@fontsource/shippori-mincho/latin-600.css';
 @import '@fontsource/shippori-mincho/latin-700.css';
-@import '@fontsource/shippori-mincho/latin-ext-400.css';
-@import '@fontsource/shippori-mincho/latin-ext-600.css';
-@import '@fontsource/shippori-mincho/latin-ext-700.css';
 
-/* Cormorant Garamond — italic body accents */
-@import '@fontsource/cormorant-garamond/latin-400.css';
-@import '@fontsource/cormorant-garamond/latin-400-italic.css';
-@import '@fontsource/cormorant-garamond/latin-500-italic.css';
-@import '@fontsource/cormorant-garamond/latin-600-italic.css';
-@import '@fontsource/cormorant-garamond/latin-ext-400.css';
-@import '@fontsource/cormorant-garamond/latin-ext-400-italic.css';
+/* Cormorant Garamond — italic body accents (variable font, 1 file each). */
+@import '@fontsource-variable/cormorant-garamond/wght.css';
+@import '@fontsource-variable/cormorant-garamond/wght-italic.css';
 
-/* JetBrains Mono — monospace UI */
-@import '@fontsource/jetbrains-mono/latin-400.css';
-@import '@fontsource/jetbrains-mono/latin-500.css';
-@import '@fontsource/jetbrains-mono/latin-600.css';
-@import '@fontsource/jetbrains-mono/latin-700.css';
-@import '@fontsource/jetbrains-mono/latin-ext-400.css';
-@import '@fontsource/jetbrains-mono/latin-ext-500.css';
-@import '@fontsource/jetbrains-mono/latin-ext-600.css';
-@import '@fontsource/jetbrains-mono/latin-ext-700.css';
+/* JetBrains Mono — monospace UI (variable font, 1 file). */
+@import '@fontsource-variable/jetbrains-mono/wght.css';

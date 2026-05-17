@@ -24,7 +24,7 @@ body.kunai-ready .v-yk2 * {
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(circle at 25% 15%, rgba(214, 56, 56, 0.1), transparent 45%),
+    radial-gradient(circle at 25% 15%, rgba(239, 68, 68, 0.1), transparent 45%),
     radial-gradient(circle at 80% 75%, rgba(212, 168, 56, 0.05), transparent 40%),
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 4px);
 }
@@ -267,8 +267,8 @@ body.kunai-ready .v-yk2 * {
     0 4px 8px rgba(0, 0, 0, 0.5),
     0 14px 28px rgba(0, 0, 0, 0.55),
     0 28px 56px rgba(0, 0, 0, 0.4),
-    0 0 0 1px rgba(214, 56, 56, 0.3),
-    0 0 30px rgba(214, 56, 56, 0.25);
+    0 0 0 1px rgba(239, 68, 68, 0.3),
+    0 0 30px rgba(239, 68, 68, 0.25);
 }
 .yk2-card:hover::before,
 .yk2-card:hover::after {
@@ -579,12 +579,25 @@ body.kunai-ready .v-yk2 * {
   }
 }
 
-/* Brand logo (PNG-based) */
+/* Brand logo (PNG-based).
+   Pulse runs as opacity on a pseudo-element so the compositor can
+   handle it on the GPU (animating `filter` would force re-paint). */
 .yk2-logo {
+  position: relative;
   filter: drop-shadow(0 0 14px rgba(255, 80, 80, 0.35)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
   transition:
     transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
     filter 0.4s;
+}
+.yk2-logo::after {
+  content: '';
+  position: absolute;
+  inset: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 80, 80, 0.55) 0%, transparent 65%);
+  opacity: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 .yk2-logo-hover:hover {
   transform: scale(1.08) rotate(8deg);
@@ -593,13 +606,13 @@ body.kunai-ready .v-yk2 * {
 @keyframes yk2LogoSpin {
   0%,
   100% {
-    filter: drop-shadow(0 0 14px rgba(255, 80, 80, 0.35)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    opacity: 0;
   }
   50% {
-    filter: drop-shadow(0 0 28px rgba(255, 80, 80, 0.7)) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.6));
+    opacity: 1;
   }
 }
-.yk2-logo-pulse {
+.yk2-logo-pulse::after {
   animation: yk2LogoSpin 2.8s ease-in-out infinite;
 }
 
@@ -674,7 +687,7 @@ body.kunai-ready .v-yk2 * {
   position: absolute;
   inset: 50px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(214, 56, 56, 0.45), transparent 65%);
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.45), transparent 65%);
   filter: blur(24px);
   animation: yk2HaloPulse 3.6s ease-in-out infinite;
   pointer-events: none;
@@ -739,8 +752,8 @@ body.kunai-ready .v-yk2 * {
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
     inset 0 -1px 0 rgba(0, 0, 0, 0.6),
     0 8px 18px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(214, 56, 56, 0.3),
-    0 0 18px rgba(214, 56, 56, 0.2);
+    0 0 0 1px rgba(239, 68, 68, 0.3),
+    0 0 18px rgba(239, 68, 68, 0.2);
 }
 .yk2-contact-link:hover::before {
   height: 80%;
@@ -827,7 +840,7 @@ body.kunai-ready .v-yk2 * {
 .yk2-cta:hover {
   color: var(--yk-bg);
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(214, 56, 56, 0.35);
+  box-shadow: 0 8px 22px rgba(239, 68, 68, 0.35);
 }
 .yk2-cta:hover::before {
   width: 100%;

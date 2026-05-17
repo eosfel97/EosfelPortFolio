@@ -9,7 +9,7 @@ export const C = {
   inkSoft: '#a89878',
   inkFaint: '#8a7e6a',
   line: '#332e25',
-  seal: '#d63838',
+  seal: '#ef4444',
   sealGlow: '#ff5050',
   accent: '#d4a838',
   green: '#9ad48c',

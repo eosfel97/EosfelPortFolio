@@ -27,7 +27,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE;
+const pageTitle = title ? `${title} — Any Gnahiet` : SITE_TITLE[lang];
 
 // Escape '</' so JSON-LD payload can't break out of the <script> tag.
 const jsonLdSerialized = jsonLd ? JSON.stringify(jsonLd).replace(/</g, '\\u003c') : '';

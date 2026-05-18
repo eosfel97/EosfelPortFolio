@@ -1,3 +1,5 @@
+import type { JSX } from 'react';
+
 import type { Locale } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';

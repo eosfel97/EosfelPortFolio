@@ -208,13 +208,15 @@ export function ParallaxKanji({
   );
 }
 
-/** Decorative hand-drawn brush underline. */
+/** Decorative section underline. Straight line — the previous wavy path
+ *  used preserveAspectRatio="none" which distorted into a slanted curve at
+ *  wide aspect ratios. */
 export function BrushStroke({ color = 'var(--yk-seal)' }: { color?: string }) {
   return (
     <svg className="brush" viewBox="0 0 100 8" preserveAspectRatio="none">
       <path
         className="yk2-draw"
-        d="M0,4 C20,2 40,6 60,3 C80,1 90,5 100,4"
+        d="M0,4 L100,4"
         fill="none"
         stroke={color}
         strokeWidth="1.6"

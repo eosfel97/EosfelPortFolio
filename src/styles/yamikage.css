@@ -887,9 +887,12 @@ body.kunai-ready .v-yk2 * {
     text-align: right;
   }
   .yk2-projects-row {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: minmax(0, 1fr) !important;
     gap: 14px !important;
     padding: 18px !important;
+  }
+  .yk2-projects-row > div {
+    min-width: 0;
   }
   .yk2-projects-row > div:first-child {
     display: flex !important;
@@ -897,7 +900,7 @@ body.kunai-ready .v-yk2 * {
     gap: 14px !important;
     text-align: left !important;
   }
-  .yk2-projects-row > div:first-child > div:first-child {
+  .yk2-projects-row > div:first-child > div:nth-child(2) {
     font-size: 54px !important;
   }
   .yk2-projects-row > div:last-child {

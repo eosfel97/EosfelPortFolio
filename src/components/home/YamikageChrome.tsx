@@ -1,6 +1,6 @@
 // Global page chrome for the Yamikage portfolio: drifting embers, the side
-// scroll-progress bar, the delegated 3D card-tilt handler, and the easter egg.
-// Rendered once per page with client:only — purely decorative / interactive.
+// scroll-progress bar, and the easter egg. Rendered once per page with
+// client:only — purely decorative / interactive.
 
 import { useEffect, useMemo, useState } from 'react';
 
@@ -70,105 +70,8 @@ function ScrollProgress() {
   );
 }
 
-/** Delegated pointer-driven 3D tilt for every .yk2-card on the page.
- *  Caches getBoundingClientRect at mouseenter to avoid the forced-reflow
- *  Lighthouse flags on every mousemove. The rect is refreshed on scroll
- *  / resize, which is enough since cards don't move otherwise. */
-function useCardTilt() {
-  useEffect(() => {
-    const MAX_ROT = 6;
-    const MAX_LIFT = 6;
-    let activeCard: HTMLElement | null = null;
-    let activeRect: DOMRect | null = null;
-    let raf = 0;
-
-    const apply = (card: HTMLElement, e: MouseEvent) => {
-      if (!activeRect) return;
-      const r = activeRect;
-      const x = (e.clientX - r.left) / r.width;
-      const y = (e.clientY - r.top) / r.height;
-      const rotY = (x - 0.5) * (MAX_ROT * 2);
-      const rotX = (0.5 - y) * (MAX_ROT * 2);
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        card.style.transform = `perspective(1400px) rotateX(${rotX.toFixed(
-          2,
-        )}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-${MAX_LIFT}px) translateZ(0)`;
-        let gloss = card.querySelector<HTMLElement>(':scope > .yk2-card-gloss');
-        if (!gloss) {
-          gloss = document.createElement('div');
-          gloss.className = 'yk2-card-gloss';
-          card.appendChild(gloss);
-        }
-        gloss.style.background = `radial-gradient(circle 40% at ${(x * 100).toFixed(
-          1,
-        )}% ${(y * 100).toFixed(1)}%, rgba(255,255,255,.10), transparent 60%)`;
-      });
-    };
-
-    const reset = (card: HTMLElement) => {
-      card.style.transform = '';
-      const gloss = card.querySelector<HTMLElement>(':scope > .yk2-card-gloss');
-      if (gloss) gloss.style.background = '';
-    };
-
-    const clearActive = () => {
-      if (activeCard) reset(activeCard);
-      activeCard = null;
-      activeRect = null;
-    };
-
-    const onOver = (e: MouseEvent) => {
-      const card = (e.target as HTMLElement)?.closest<HTMLElement>('.yk2-card');
-      if (!card) return;
-      if (activeCard !== card) {
-        if (activeCard) reset(activeCard);
-        activeCard = card;
-        activeRect = card.getBoundingClientRect();
-      }
-    };
-
-    const onMove = (e: MouseEvent) => {
-      if (!activeCard || !activeRect) return;
-      const r = activeRect;
-      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) {
-        clearActive();
-        return;
-      }
-      apply(activeCard, e);
-    };
-
-    const onLeave = (e: MouseEvent) => {
-      if (activeCard && !activeCard.contains(e.relatedTarget as Node)) {
-        clearActive();
-      }
-    };
-
-    // The cached rect goes stale on scroll/resize — refresh it then.
-    const refreshRect = () => {
-      if (activeCard) activeRect = activeCard.getBoundingClientRect();
-    };
-
-    document.addEventListener('mouseover', onOver);
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseout', onLeave);
-    window.addEventListener('scroll', refreshRect, { passive: true });
-    window.addEventListener('resize', refreshRect);
-
-    return () => {
-      document.removeEventListener('mouseover', onOver);
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseout', onLeave);
-      window.removeEventListener('scroll', refreshRect);
-      window.removeEventListener('resize', refreshRect);
-      cancelAnimationFrame(raf);
-    };
-  }, []);
-}
-
 export default function YamikageChrome({ lang }: { lang: Locale }) {
   const [eggOn, setEgg] = useState(false);
-  useCardTilt();
 
   useEffect(() => {
     const seq = [

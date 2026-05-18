@@ -7,7 +7,7 @@ import { Reveal } from './shared';
 export default function Projects({ lang }: { lang: Locale }) {
   return (
     <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.projects} lang={lang} n="02" cmd="ls ./projects --sort=year" />
+      <SHead label={L.projects} lang={lang} cmd="ls ./projects --sort=year" />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {D.projects.map((p, i) => (
@@ -92,9 +92,6 @@ export default function Projects({ lang }: { lang: Locale }) {
                   style={{ fontSize: 11, lineHeight: 1.75, color: C.inkSoft }}
                 >
                   <div>
-                    <span className="yk2-cmt">// meta</span>
-                  </div>
-                  <div>
                     <span className="yk2-key">year</span> ={' '}
                     <span className="yk2-str">&quot;{p.year}&quot;</span>
                   </div>
@@ -107,7 +104,7 @@ export default function Projects({ lang }: { lang: Locale }) {
                     <span className="yk2-str">{p.stack.length}</span>
                   </div>
                 </div>
-                {p.liveUrl ? (
+                {p.liveUrl && (
                   <a
                     href={p.liveUrl}
                     className="yk2-mono yk2-link"
@@ -123,18 +120,6 @@ export default function Projects({ lang }: { lang: Locale }) {
                   >
                     <span className="yk2-prompt">$</span> open {p.name} →
                   </a>
-                ) : (
-                  <div
-                    className="yk2-mono"
-                    style={{
-                      fontSize: 11,
-                      color: C.inkFaint,
-                      marginTop: 14,
-                      letterSpacing: '.1em',
-                    }}
-                  >
-                    <span className="yk2-cmt">// private — no public URL</span>
-                  </div>
                 )}
               </div>
             </div>

@@ -41,7 +41,7 @@ export default function Stack({ lang }: { lang: Locale }) {
   const s = D.stack;
   return (
     <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.stack} lang={lang} n="03" cmd="stack --tree --all" />
+      <SHead label={L.stack} lang={lang} cmd="stack --tree --all" />
 
       <div
         className="yk2-lang-grid"

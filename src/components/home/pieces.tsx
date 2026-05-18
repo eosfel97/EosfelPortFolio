@@ -57,45 +57,12 @@ export function LangSwitch({ lang }: { lang: Locale }) {
   );
 }
 
-/** Section heading: index, title, shell-style command. */
-export function SHead({
-  label,
-  lang,
-  n,
-  cmd,
-}: {
-  label: SectionLabel;
-  lang: Locale;
-  n: string;
-  cmd: string;
-}) {
+/** Section heading: title and shell-style command. */
+export function SHead({ label, lang, cmd }: { label: SectionLabel; lang: Locale; cmd: string }) {
   return (
     <Reveal>
       <div className="yk2-shead" style={{ marginBottom: 30 }}>
-        <div
-          className="yk2-display"
-          style={{
-            fontSize: 36,
-            fontWeight: 700,
-            lineHeight: 1,
-            color: C.seal,
-            letterSpacing: '0.04em',
-          }}
-        >
-          §{n}
-        </div>
         <div style={{ flex: 1 }}>
-          <div
-            className="yk2-mono"
-            style={{
-              fontSize: 10,
-              letterSpacing: '.3em',
-              color: C.inkFaint,
-              textTransform: 'uppercase',
-            }}
-          >
-            // section · {n}
-          </div>
           <h2
             className="yk2-display"
             style={{

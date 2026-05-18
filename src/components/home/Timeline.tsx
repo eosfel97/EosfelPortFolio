@@ -8,67 +8,40 @@ export default function Timeline({ lang }: { lang: Locale }) {
   const tl = D.timeline;
   return (
     <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.timeline} lang={lang} n="05" cmd="git log --since=2019" />
-      <Reveal>
-        <div style={{ position: 'relative', paddingLeft: 60 }}>
-          <div
-            className="yk2-vline"
-            aria-hidden
-            style={{
-              position: 'absolute',
-              left: 30,
-              top: 4,
-              bottom: 4,
-              width: 2,
-              background: `linear-gradient(180deg, ${C.seal}, ${C.accent}, ${C.seal})`,
-              boxShadow: '0 0 8px rgba(255,80,80,.4)',
-            }}
-          />
-          {tl.map((tm, i) => (
-            <Reveal key={tm.year} delay={i * 80} kind="l">
+      <SHead label={L.timeline} lang={lang} cmd="git log --since=2019" />
+
+      <div className="yk2-timeline-grid">
+        {tl.map((tm, i) => (
+          <Reveal key={tm.year} delay={i * 60}>
+            <article className="yk2-tl-card">
+              <span className="yk2-tl-mark" aria-hidden />
               <div
-                className="yk2-tl-row"
+                className="yk2-display yk2-tl-year"
                 style={{
-                  display: 'grid',
-                  gridTemplateColumns: '70px 1fr',
-                  gap: 18,
-                  alignItems: 'center',
-                  padding: '14px 0',
-                  position: 'relative',
+                  fontSize: 40,
+                  fontWeight: 700,
+                  color: C.seal,
+                  lineHeight: 1,
+                  letterSpacing: '-0.02em',
                 }}
               >
-                <div
-                  aria-hidden
-                  style={{
-                    position: 'absolute',
-                    left: -34,
-                    width: 14,
-                    height: 14,
-                    borderRadius: '50%',
-                    background: C.seal,
-                    boxShadow: `0 0 12px rgba(255,80,80,.6), inset 0 0 0 2px ${C.bg}`,
-                  }}
-                />
-                <div
-                  className="yk2-display"
-                  style={{
-                    fontSize: 28,
-                    fontWeight: 700,
-                    color: C.seal,
-                    lineHeight: 1,
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  {tm.year}
-                </div>
-                <div className="yk2-italic" style={{ fontSize: 17, lineHeight: 1.4, color: C.ink }}>
-                  {pickLang(tm.t, lang)}
-                </div>
+                {tm.year}
               </div>
-            </Reveal>
-          ))}
-        </div>
-      </Reveal>
+              <div
+                className="yk2-italic yk2-tl-text"
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.45,
+                  color: C.inkSoft,
+                  marginTop: 10,
+                }}
+              >
+                {pickLang(tm.t, lang)}
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </div>
     </section>
   );
 }

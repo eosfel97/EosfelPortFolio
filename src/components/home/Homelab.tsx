@@ -18,7 +18,7 @@ export default function Homelab({ lang }: { lang: Locale }) {
   const h = D.homelab;
   return (
     <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.homelab} lang={lang} n="04" cmd="uptime --rack" />
+      <SHead label={L.homelab} lang={lang} cmd="uptime --rack" />
 
       <div
         className="yk2-homelab-top"
@@ -39,9 +39,6 @@ export default function Homelab({ lang }: { lang: Locale }) {
           <div className="yk2-mono" style={{ fontSize: 11, color: C.inkFaint, marginTop: 22 }}>
             <div>
               <span className="yk2-prompt">⟩</span> uptime --homelab
-            </div>
-            <div style={{ paddingLeft: 16, color: C.inkSoft }}>
-              <span className="yk2-cmt">// metrics scraped @ grafana.kuroshin.dev/dashboard</span>
             </div>
           </div>
         </Reveal>

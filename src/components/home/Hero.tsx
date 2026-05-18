@@ -145,10 +145,6 @@ export default function Hero({ lang }: { lang: Locale }) {
         style={{ position: 'absolute', bottom: 36, left: 84, fontSize: 11, color: C.inkFaint }}
       >
         <span className="yk2-prompt">⟩</span> scroll --next
-        <span className="yk2-cmt">
-          {' '}
-          // {lang === 'fr' ? '5 sections en aval' : '5 sections below'}
-        </span>
         <span style={{ marginLeft: 18, color: C.seal, animation: 'yk2Cursor 1.4s infinite' }}>
           ↓
         </span>

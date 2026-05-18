@@ -712,10 +712,16 @@ body.kunai-ready .v-yk2 * {
   position: relative;
   z-index: 1;
 }
+/* 8 items: only divisors (1/2/4) keep rows balanced — never use auto-fill here. */
 .yk2-timeline-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 14px;
+}
+@media (max-width: 1100px) {
+  .yk2-timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 .yk2-tl-card {
   position: relative;
@@ -926,7 +932,7 @@ body.kunai-ready .v-yk2 * {
     padding: 16px !important;
   }
   .yk2-timeline-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+    grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
   }
   .yk2-tl-card {
@@ -1009,6 +1015,9 @@ body.kunai-ready .v-yk2 * {
     padding: 2px 6px !important;
   }
   .yk2-stats-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .yk2-timeline-grid {
     grid-template-columns: 1fr !important;
   }
 }

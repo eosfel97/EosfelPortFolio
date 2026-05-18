@@ -253,12 +253,13 @@ export const PORTFOLIO_DATA: PortfolioData = {
     en: 'Open to web & mobile development opportunities, work-study or full-time. Also happy to just talk self-hosting and Debian servers.',
     links: [
       { label: 'GitHub', value: 'github.com/eosfel97', href: 'https://github.com/eosfel97' },
-      { label: 'Email', value: 'any.gouba@gmail.com', href: 'mailto:any.gouba@gmail.com' },
       {
         label: 'LinkedIn',
-        value: 'linkedin.com/in/anygnahiet',
-        href: 'https://linkedin.com/in/anygnahiet',
+        value: 'linkedin.com/in/any-gnahiet',
+        href: 'https://www.linkedin.com/in/any-gnahiet-075339234',
       },
+      { label: 'Email', value: 'any.gouba@gmail.com', href: 'mailto:any.gouba@gmail.com' },
+      { label: 'CV', value: 'cv.pdf', href: '/cv/cv-fr.pdf' },
     ],
   },
 };

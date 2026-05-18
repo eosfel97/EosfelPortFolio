@@ -5,7 +5,7 @@ export const SITE_URL = 'https://anygnahiet.dev';
 
 export const SOCIAL_LINKS = {
   github: 'https://github.com/eosfel97',
-  linkedin: 'https://linkedin.com/in/anygnahiet',
+  linkedin: 'https://www.linkedin.com/in/any-gnahiet-075339234',
 } as const;
 
 export const SUPPORTED_LOCALES = ['fr', 'en'] as const;

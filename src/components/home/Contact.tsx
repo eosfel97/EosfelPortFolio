@@ -3,7 +3,6 @@ import type { JSX } from 'react';
 import type { Locale } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
-import { EGG_EVENT } from './YamikageChrome';
 import { LetterReveal, Reveal } from './shared';
 
 /** Allow only http(s)/mailto/tel and same-origin asset URLs; falls back to '#'. */
@@ -71,8 +70,6 @@ export default function Contact({ lang }: { lang: Locale }) {
   const cv = c.links.find((l) => l.label === 'CV');
   const socialLinks = c.links.filter((l) => l.label !== 'CV');
 
-  const fireEgg = () => window.dispatchEvent(new Event(EGG_EVENT));
-
   return (
     <section
       style={{
@@ -87,10 +84,6 @@ export default function Contact({ lang }: { lang: Locale }) {
       <div
         className="yk2-contact-grid"
         style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr auto',
-          gap: 80,
-          alignItems: 'center',
           position: 'relative',
           zIndex: 2,
         }}
@@ -213,100 +206,6 @@ export default function Contact({ lang }: { lang: Locale }) {
             })}
           </div>
         </div>
-
-        <Reveal kind="r">
-          <div
-            className="yk2-logo-zone"
-            role="button"
-            tabIndex={0}
-            aria-label={lang === 'fr' ? 'Easter egg' : 'Easter egg'}
-            data-cursor="hover"
-            onClick={fireEgg}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                fireEgg();
-              }
-            }}
-          >
-            <div className="yk2-halo" aria-hidden />
-
-            <svg className="yk2-orbit yk2-spin-slow" viewBox="0 0 360 360" aria-hidden>
-              <circle
-                cx="180"
-                cy="180"
-                r="170"
-                fill="none"
-                stroke={C.seal}
-                strokeWidth=".6"
-                strokeDasharray="3 5"
-                opacity=".4"
-              />
-            </svg>
-            <svg className="yk2-orbit yk2-spin-rev" viewBox="0 0 360 360" aria-hidden>
-              <circle
-                cx="180"
-                cy="180"
-                r="148"
-                fill="none"
-                stroke={C.accent}
-                strokeWidth=".5"
-                strokeDasharray="1 4"
-                opacity=".35"
-              />
-            </svg>
-            <svg className="yk2-orbit yk2-spin-mid" viewBox="0 0 360 360" aria-hidden>
-              {Array.from({ length: 24 }).map((_, i) => {
-                const angle = (i / 24) * Math.PI * 2;
-                const r1 = 158;
-                const r2 = i % 6 === 0 ? 168 : 163;
-                const round = (n: number) => Math.round(n * 100) / 100;
-                return (
-                  <line
-                    key={i}
-                    x1={round(180 + Math.cos(angle) * r1)}
-                    y1={round(180 + Math.sin(angle) * r1)}
-                    x2={round(180 + Math.cos(angle) * r2)}
-                    y2={round(180 + Math.sin(angle) * r2)}
-                    stroke={i % 6 === 0 ? C.seal : C.inkFaint}
-                    strokeWidth={i % 6 === 0 ? 1.2 : 0.6}
-                    opacity={i % 6 === 0 ? 0.8 : 0.4}
-                  />
-                );
-              })}
-            </svg>
-
-            <div
-              className="yk2-big-logo"
-              aria-hidden
-              style={{
-                backgroundImage: 'url(/logo-trans.png)',
-                backgroundSize: 'contain',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                filter:
-                  'drop-shadow(0 0 26px rgba(255,80,80,.55)) drop-shadow(0 4px 6px rgba(0,0,0,.6))',
-              }}
-            />
-
-            <div
-              className="yk2-mono"
-              style={{
-                position: 'absolute',
-                bottom: -14,
-                left: '50%',
-                transform: 'translateX(-50%)',
-                fontSize: 10,
-                letterSpacing: '.3em',
-                color: C.inkFaint,
-                whiteSpace: 'nowrap',
-                zIndex: 5,
-              }}
-            >
-              <span style={{ color: C.seal }}>▸</span> CLICK · EASTER EGG
-            </div>
-          </div>
-        </Reveal>
       </div>
 
       <Reveal>

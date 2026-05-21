@@ -3,12 +3,7 @@ import '../../styles/yamikage.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import KunaiCursor from '../../components/home/KunaiCursor.tsx';
 import YamikageChrome from '../../components/home/YamikageChrome.tsx';
-import Hero from '../../components/home/Hero.tsx';
-import Projects from '../../components/home/Projects.tsx';
-import Stack from '../../components/home/Stack.tsx';
-import Homelab from '../../components/home/Homelab.tsx';
-import Timeline from '../../components/home/Timeline.tsx';
-import Contact from '../../components/home/Contact.tsx';
+import Home from '../../components/home/Home.tsx';
 import { SITE_URL, SOCIAL_LINKS } from '../../consts';
 import { PORTFOLIO_DATA } from '../../data/portfolio';
 
@@ -34,13 +29,8 @@ const jsonLd = {
 >
   <main id="main-content" class="v-yk2">
     <KunaiCursor client:only="react" />
-    <YamikageChrome client:only="react" lang={lang} />
+    <YamikageChrome client:only="react" />
 
-    <Hero client:visible lang={lang} />
-    <Projects client:visible lang={lang} />
-    <Stack client:visible lang={lang} />
-    <Homelab client:visible lang={lang} />
-    <Timeline client:visible lang={lang} />
-    <Contact client:visible lang={lang} />
+    <Home client:visible lang={lang} />
   </main>
 </BaseLayout>

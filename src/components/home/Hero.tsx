@@ -141,7 +141,7 @@ export default function Hero({ lang }: { lang: Locale }) {
       />
 
       <div
-        className="yk2-mono"
+        className="yk2-mono yk2-hero-scrollhint"
         style={{ position: 'absolute', bottom: 36, left: 84, fontSize: 11, color: C.inkFaint }}
       >
         <span className="yk2-prompt">⟩</span> scroll --next

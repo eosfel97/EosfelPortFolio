@@ -9,9 +9,18 @@ export default function KunaiCursor() {
   const trailRef = useRef<HTMLDivElement>(null);
   const [isDown, setDown] = useState(false);
   const [overInteractive, setOver] = useState(false);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(pointer: coarse)').matches) return;
+    const mq = window.matchMedia('(pointer: coarse), (max-width: 720px)');
+    const apply = () => setShow(!mq.matches);
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
+  }, []);
+
+  useEffect(() => {
+    if (!show) return;
 
     let tx = window.innerWidth / 2;
     let ty = window.innerHeight / 2;
@@ -85,9 +94,9 @@ export default function KunaiCursor() {
       cancelAnimationFrame(raf);
       document.body.classList.remove('kunai-ready');
     };
-  }, []);
+  }, [show]);
 
-  if (typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches) {
+  if (!show) {
     return null;
   }
 

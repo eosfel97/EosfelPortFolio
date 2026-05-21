@@ -97,27 +97,6 @@ body.kunai-ready .v-yk2 * {
     0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
-@keyframes yk2Pulse {
-  0%,
-  100% {
-    box-shadow:
-      inset 0 0 0 2px var(--yk-bg),
-      inset 0 0 0 3.5px var(--yk-seal),
-      0 0 26px rgba(255, 80, 80, 0.45),
-      0 0 0 1px rgba(255, 255, 255, 0.05);
-  }
-  50% {
-    box-shadow:
-      inset 0 0 0 2px var(--yk-bg),
-      inset 0 0 0 3.5px var(--yk-seal),
-      0 0 46px rgba(255, 80, 80, 0.85),
-      0 0 0 1px rgba(255, 255, 255, 0.12);
-  }
-}
-.yk2-pulse {
-  animation: yk2Pulse 2.6s ease-in-out infinite;
-}
-
 .yk2-shead {
   display: flex;
   align-items: baseline;
@@ -454,22 +433,6 @@ body.kunai-ready .v-yk2 * {
   color: var(--yk-seal);
 }
 
-/* Easter-egg overlay */
-@keyframes yk2EggBlast {
-  0% {
-    transform: scale(0.4) rotate(-180deg);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.1) rotate(10deg);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
-}
-
 /* Brand logo (PNG-based).
    Pulse runs as opacity on a pseudo-element so the compositor can
    handle it on the GPU (animating `filter` would force re-paint). */
@@ -505,83 +468,6 @@ body.kunai-ready .v-yk2 * {
 }
 .yk2-logo-pulse::after {
   animation: yk2LogoSpin 2.8s ease-in-out infinite;
-}
-
-/* ── CONTACT — fluid animations ── */
-@keyframes yk2Spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes yk2SpinRev {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-.yk2-spin-slow {
-  animation: yk2Spin 32s linear infinite;
-  transform-origin: 50% 50%;
-}
-.yk2-spin-mid {
-  animation: yk2Spin 18s linear infinite;
-  transform-origin: 50% 50%;
-}
-.yk2-spin-rev {
-  animation: yk2SpinRev 24s linear infinite;
-  transform-origin: 50% 50%;
-}
-
-.yk2-logo-zone {
-  position: relative;
-  width: 360px;
-  height: 360px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.yk2-logo-zone .yk2-orbit {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.yk2-logo-zone .yk2-big-logo {
-  position: relative;
-  z-index: 3;
-  width: 230px;
-  height: 230px;
-  transition:
-    transform 0.55s cubic-bezier(0.2, 0.7, 0.3, 1),
-    filter 0.5s;
-}
-.yk2-logo-zone:hover .yk2-big-logo {
-  transform: scale(1.06) rotate(-3deg);
-  filter: drop-shadow(0 0 42px rgba(255, 80, 80, 0.85)) drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
-}
-@keyframes yk2HaloPulse {
-  0%,
-  100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.75;
-    transform: scale(1.08);
-  }
-}
-.yk2-halo {
-  position: absolute;
-  inset: 50px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(239, 68, 68, 0.45), transparent 65%);
-  filter: blur(24px);
-  animation: yk2HaloPulse 3.6s ease-in-out infinite;
-  pointer-events: none;
 }
 
 .yk2-letter {
@@ -807,14 +693,6 @@ body.kunai-ready .v-yk2 * {
   .yk2-contact-grid {
     gap: 40px !important;
   }
-  .yk2-logo-zone {
-    width: 280px !important;
-    height: 280px !important;
-  }
-  .yk2-logo-zone .yk2-big-logo {
-    width: 180px !important;
-    height: 180px !important;
-  }
 }
 
 /* ── MOBILE (≤720px) ── */
@@ -838,6 +716,8 @@ body.kunai-ready .v-yk2 * {
   .v-yk2 section:first-of-type {
     padding-top: 96px !important;
     min-height: auto !important;
+    border-top: none !important;
+    margin-top: 0 !important;
   }
   .v-yk2 h1 {
     font-size: 52px !important;
@@ -863,6 +743,9 @@ body.kunai-ready .v-yk2 * {
   .yk2-hero-bigseal {
     display: none !important;
   }
+  .yk2-hero-scrollhint {
+    display: none !important;
+  }
   .yk2-header {
     top: 18px !important;
     left: 22px !important;
@@ -874,17 +757,10 @@ body.kunai-ready .v-yk2 * {
   .yk2-header > div:first-child > div > div:last-child {
     font-size: 16px !important;
   }
+  /* Section heading + brush stroke hidden on mobile — the bottom tab bar
+     already shows which section is active. */
   .yk2-shead {
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-  }
-  .yk2-shead > div:first-child h2 {
-    font-size: 22px !important;
-  }
-  .yk2-shead > div:last-child {
-    font-size: 9px !important;
-    width: 100%;
-    text-align: right;
+    display: none !important;
   }
   .yk2-projects-row {
     grid-template-columns: minmax(0, 1fr) !important;
@@ -965,7 +841,7 @@ body.kunai-ready .v-yk2 * {
   }
   .yk2-contact-grid {
     grid-template-columns: 1fr !important;
-    gap: 36px !important;
+    gap: 24px !important;
   }
   .yk2-contact-title {
     font-size: 48px !important;
@@ -977,19 +853,11 @@ body.kunai-ready .v-yk2 * {
   .yk2-contact-links {
     justify-content: flex-start;
   }
-  .yk2-logo-zone {
-    width: 240px !important;
-    height: 240px !important;
-    margin: 0 auto;
-  }
-  .yk2-logo-zone .yk2-big-logo {
-    width: 150px !important;
-    height: 150px !important;
-  }
   .yk2-footer {
     flex-direction: column !important;
     gap: 10px !important;
     align-items: flex-start !important;
+    margin-top: 28px !important;
   }
   .yk2-card {
     transform: none !important;
@@ -1023,6 +891,77 @@ body.kunai-ready .v-yk2 * {
   .yk2-timeline-grid {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* ── MOBILE BOTTOM TAB BAR (rendered only on mobile by Home.tsx) ── */
+.yk2-mpane {
+  position: relative;
+  z-index: 1;
+  padding-bottom: calc(60px + env(safe-area-inset-bottom));
+}
+.yk2-tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  background: rgba(16, 12, 9, 0.92);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(239, 68, 68, 0.22);
+  padding: 6px 2px calc(6px + env(safe-area-inset-bottom));
+}
+.yk2-tabbtn {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 6px 2px 4px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--yk-ink-faint);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  transition: color 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.yk2-tabbtn::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  border-radius: 0 0 2px 2px;
+  background: transparent;
+  transition: background 0.2s;
+}
+.yk2-tabbtn svg {
+  transition: filter 0.2s;
+}
+.yk2-tabbtn-label {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.yk2-tabbtn.on {
+  color: var(--yk-seal);
+}
+.yk2-tabbtn.on::before {
+  background: var(--yk-seal);
+  box-shadow: 0 0 8px rgba(255, 80, 80, 0.6);
+}
+.yk2-tabbtn.on svg {
+  filter: drop-shadow(0 0 6px rgba(255, 80, 80, 0.5));
 }
 
 /* ── REDUCED MOTION ── */

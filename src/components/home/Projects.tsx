@@ -119,7 +119,7 @@ export default function Projects({ lang }: { lang: Locale }) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <span className="yk2-prompt">$</span> open {p.name} →
+                    {lang === 'fr' ? 'voir le projet' : 'view project'} →
                   </a>
                 )}
               </div>

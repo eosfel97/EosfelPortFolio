@@ -698,14 +698,7 @@
   }
   .yk2-header {
     top: 18px !important;
-    left: 22px !important;
     right: 22px !important;
-  }
-  .yk2-header > div:first-child > div > div:first-child {
-    font-size: 9px !important;
-  }
-  .yk2-header > div:first-child > div > div:last-child {
-    font-size: 16px !important;
   }
   /* Section heading + brush stroke hidden on mobile — the bottom tab bar
      already shows which section is active. */

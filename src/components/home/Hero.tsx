@@ -2,7 +2,7 @@ import type { Locale } from '../../consts';
 import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
-import { Logo, LangSwitch } from './pieces';
+import { LangSwitch } from './pieces';
 import { Reveal, Typewriter } from './shared';
 
 export default function Hero({ lang }: { lang: Locale }) {
@@ -12,34 +12,25 @@ export default function Hero({ lang }: { lang: Locale }) {
   return (
     <section
       style={{
-        padding: `76px ${SECTION_PAD_X}px 64px`,
-        minHeight: '100vh',
+        padding: `160px ${SECTION_PAD_X}px 80px`,
+        minHeight: '80vh',
         position: 'relative',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
       }}
     >
       <Reveal>
         <div
           className="yk2-header"
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: 80,
             position: 'absolute',
             top: 30,
-            left: SECTION_PAD_X,
             right: 90,
           }}
         >
-          <Logo size={58} pulse />
           <LangSwitch lang={lang} />
         </div>
       </Reveal>
 
-      <div style={{ maxWidth: 880, position: 'relative' }}>
+      <div style={{ maxWidth: 680, position: 'relative' }}>
         <h1
           className="yk2-display"
           style={{

@@ -1,4 +1,5 @@
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
@@ -40,8 +41,8 @@ function StackList({ label, items }: { label: string; items: string[] }) {
 export default function Stack({ lang }: { lang: Locale }) {
   const s = D.stack;
   return (
-    <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.stack} lang={lang} cmd="stack --tree --all" />
+    <section style={{ padding: `60px ${SECTION_PAD_X}px 80px`, position: 'relative' }}>
+      <SHead label={L.stack} lang={lang} />
 
       <div
         className="yk2-lang-grid"

@@ -1,6 +1,7 @@
 import type { JSX } from 'react';
 
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { LetterReveal, Reveal } from './shared';
@@ -73,7 +74,7 @@ export default function Contact({ lang }: { lang: Locale }) {
   return (
     <section
       style={{
-        padding: '90px 84px 80px',
+        padding: `90px ${SECTION_PAD_X}px 80px`,
         position: 'relative',
         overflow: 'hidden',
         borderTop: `1px solid ${C.line}`,
@@ -89,21 +90,6 @@ export default function Contact({ lang }: { lang: Locale }) {
         }}
       >
         <div>
-          <Reveal>
-            <div
-              className="yk2-mono"
-              style={{
-                fontSize: 11,
-                letterSpacing: '.35em',
-                color: C.seal,
-                marginBottom: 18,
-              }}
-            >
-              <span className="yk2-prompt">⟩</span>{' '}
-              {lang === 'fr' ? 'PRENONS CONTACT' : 'GET IN TOUCH'}
-            </div>
-          </Reveal>
-
           <h2
             className="yk2-display yk2-contact-title"
             style={{

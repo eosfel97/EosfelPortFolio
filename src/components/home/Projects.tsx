@@ -1,4 +1,5 @@
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
@@ -6,8 +7,8 @@ import { Reveal } from './shared';
 
 export default function Projects({ lang }: { lang: Locale }) {
   return (
-    <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.projects} lang={lang} cmd="ls ./projects --sort=year" />
+    <section style={{ padding: `60px ${SECTION_PAD_X}px 80px`, position: 'relative' }}>
+      <SHead label={L.projects} lang={lang} />
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {D.projects.map((p, i) => (

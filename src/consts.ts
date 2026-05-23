@@ -14,3 +14,5 @@ export const SOCIAL_LINKS = {
 export const SUPPORTED_LOCALES = ['fr', 'en'] as const;
 export type Locale = (typeof SUPPORTED_LOCALES)[number];
 export const DEFAULT_LOCALE: Locale = 'en';
+
+export const SECTION_PAD_X = 84; // px — horizontal padding shared across all page sections

@@ -10,12 +10,6 @@
   overflow-x: hidden;
   min-height: 100vh;
 }
-/* Native cursor stays visible until the kunai island is mounted — avoids
-   a brief moment with no cursor at all. */
-body.kunai-ready .v-yk2,
-body.kunai-ready .v-yk2 * {
-  cursor: none !important;
-}
 
 .v-yk2::before {
   content: '';
@@ -311,6 +305,7 @@ body.kunai-ready .v-yk2 * {
   animation: yk2Drift var(--dur) linear var(--delay) infinite;
   pointer-events: none;
   z-index: 0;
+  will-change: transform, opacity;
 }
 .yk2-ember.amber {
   background: var(--yk-accent);
@@ -372,11 +367,6 @@ body.kunai-ready .v-yk2 * {
   letter-spacing: 0.5em;
 }
 
-/* ── PARALLAX ── */
-.yk2-px {
-  will-change: transform;
-}
-
 /* ── BRUSH STROKE ── */
 @keyframes yk2Draw {
   from {
@@ -392,20 +382,6 @@ body.kunai-ready .v-yk2 * {
 .yk2-draw {
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-}
-
-/* ── HERO PARALLAX KANJI ── */
-@keyframes yk2Float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-12px);
-  }
-}
-.yk2-float {
-  animation: yk2Float 8s ease-in-out infinite;
 }
 
 /* link hover */
@@ -525,33 +501,6 @@ body.kunai-ready .v-yk2 * {
 .yk2-contact-icon:focus-visible {
   outline: 2px solid var(--yk-seal);
   outline-offset: 3px;
-}
-
-@keyframes yk2KDrift {
-  0% {
-    transform: translate(0, 0) rotate(0deg);
-    opacity: 0;
-  }
-  12% {
-    opacity: var(--op);
-  }
-  88% {
-    opacity: var(--op);
-  }
-  100% {
-    transform: translate(var(--dx), -110vh) rotate(var(--rot));
-    opacity: 0;
-  }
-}
-.yk2-kdrift {
-  position: absolute;
-  bottom: -15%;
-  font-family: var(--font-display);
-  font-weight: 600;
-  animation: yk2KDrift var(--dur) linear var(--delay) infinite;
-  user-select: none;
-  pointer-events: none;
-  will-change: transform;
 }
 
 .yk2-cta {
@@ -699,6 +648,7 @@ body.kunai-ready .v-yk2 * {
 @media (max-width: 720px) {
   .v-yk2 section {
     padding: 40px 22px !important;
+    min-height: auto !important;
   }
   body {
     cursor: auto !important;

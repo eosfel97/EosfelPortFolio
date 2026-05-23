@@ -1,4 +1,5 @@
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
@@ -7,8 +8,8 @@ import { Reveal } from './shared';
 export default function Timeline({ lang }: { lang: Locale }) {
   const tl = D.timeline;
   return (
-    <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.timeline} lang={lang} cmd="git log --since=2019" />
+    <section style={{ padding: `60px ${SECTION_PAD_X}px 80px`, position: 'relative' }}>
+      <SHead label={L.timeline} lang={lang} />
 
       <div className="yk2-timeline-grid">
         {tl.map((tm, i) => (

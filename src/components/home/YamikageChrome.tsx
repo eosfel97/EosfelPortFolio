@@ -9,7 +9,8 @@ import { C } from './colors';
 function Embers() {
   const embers = useMemo(
     () =>
-      Array.from({ length: 24 }).map(() => ({
+      Array.from({ length: 12 }).map((_, i) => ({
+        id: i,
         left: Math.random() * 100,
         delay: Math.random() * 8,
         duration: 14 + Math.random() * 10,
@@ -21,9 +22,9 @@ function Embers() {
   );
   return (
     <>
-      {embers.map((e, i) => (
+      {embers.map((e) => (
         <span
-          key={i}
+          key={e.id}
           aria-hidden
           className={'yk2-ember' + (e.amber ? ' amber' : '')}
           style={
@@ -45,13 +46,20 @@ function Embers() {
 function ScrollProgress() {
   const [p, setP] = useState(0);
   useEffect(() => {
+    let raf = 0;
     const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
-      setP(max > 0 ? window.scrollY / max : 0);
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        setP(max > 0 ? window.scrollY / max : 0);
+      });
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      cancelAnimationFrame(raf);
+    };
   }, []);
   return (
     <div className="yk2-progress" aria-hidden>

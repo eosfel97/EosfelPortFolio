@@ -18,13 +18,14 @@ type NestedKeyOf<T, Prefix extends string = ''> = {
 
 type UIKeys = NestedKeyOf<(typeof ui)[typeof DEFAULT_LOCALE]>;
 
-function getNestedValue(obj: Record<string, unknown>, path: string): string {
-  return path.split('.').reduce<unknown>((acc, key) => {
+function getNestedValue(obj: Record<string, unknown>, path: string): string | undefined {
+  const result = path.split('.').reduce<unknown>((acc, key) => {
     if (acc && typeof acc === 'object') {
       return (acc as Record<string, unknown>)[key];
     }
     return undefined;
-  }, obj) as string;
+  }, obj);
+  return typeof result === 'string' ? result : undefined;
 }
 
 export function useTranslations(lang: Locale) {

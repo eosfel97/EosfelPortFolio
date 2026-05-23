@@ -1,4 +1,5 @@
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { Logo, LangSwitch } from './pieces';
@@ -11,7 +12,7 @@ export default function Hero({ lang }: { lang: Locale }) {
   return (
     <section
       style={{
-        padding: '76px 84px 64px',
+        padding: `76px ${SECTION_PAD_X}px 64px`,
         minHeight: '100vh',
         position: 'relative',
         display: 'flex',
@@ -29,42 +30,16 @@ export default function Hero({ lang }: { lang: Locale }) {
             marginBottom: 80,
             position: 'absolute',
             top: 30,
-            left: 84,
+            left: SECTION_PAD_X,
             right: 90,
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <Logo size={58} pulse />
-            <div>
-              <div
-                className="yk2-mono"
-                style={{ fontSize: 10.5, letterSpacing: '.25em', color: C.inkFaint }}
-              >
-                <span className="yk2-prompt">~/</span>portfolio · 2026.05
-              </div>
-              <div className="yk2-display" style={{ fontSize: 19, fontWeight: 600 }}>
-                {id.handle}
-                <span style={{ color: C.seal }}>.dev</span>
-              </div>
-            </div>
-          </div>
+          <Logo size={58} pulse />
           <LangSwitch lang={lang} />
         </div>
       </Reveal>
 
       <div style={{ maxWidth: 880, position: 'relative' }}>
-        <div
-          className="yk2-mono yk2-hero-line"
-          style={{
-            fontSize: 12,
-            letterSpacing: '.35em',
-            color: C.seal,
-            marginBottom: 18,
-            animationDelay: '0ms',
-          }}
-        >
-          ⟢ {lang === 'fr' ? 'IDENTITÉ · CHAPITRE PREMIER' : 'IDENTITY · CHAPTER ONE'} ⟣
-        </div>
         <h1
           className="yk2-display"
           style={{
@@ -131,23 +106,6 @@ export default function Hero({ lang }: { lang: Locale }) {
             </span>
           </div>
         </Reveal>
-      </div>
-
-      <Logo
-        size={150}
-        pulse
-        className="yk2-hero-bigseal"
-        style={{ position: 'absolute', top: 104, right: 124 }}
-      />
-
-      <div
-        className="yk2-mono yk2-hero-scrollhint"
-        style={{ position: 'absolute', bottom: 36, left: 84, fontSize: 11, color: C.inkFaint }}
-      >
-        <span className="yk2-prompt">⟩</span> scroll --next
-        <span style={{ marginLeft: 18, color: C.seal, animation: 'yk2Cursor 1.4s infinite' }}>
-          ↓
-        </span>
       </div>
     </section>
   );

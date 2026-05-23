@@ -57,8 +57,8 @@ export function LangSwitch({ lang }: { lang: Locale }) {
   );
 }
 
-/** Section heading: title and shell-style command. */
-export function SHead({ label, lang, cmd }: { label: SectionLabel; lang: Locale; cmd: string }) {
+/** Section heading: title with decorative underline. */
+export function SHead({ label, lang }: { label: SectionLabel; lang: Locale }) {
   return (
     <Reveal>
       <div className="yk2-shead" style={{ marginBottom: 30 }}>
@@ -76,9 +76,6 @@ export function SHead({ label, lang, cmd }: { label: SectionLabel; lang: Locale;
           >
             {pickLang(label, lang)}
           </h2>
-        </div>
-        <div className="yk2-mono" style={{ fontSize: 10, color: C.inkFaint }}>
-          $ {cmd}
         </div>
         <BrushStroke />
       </div>

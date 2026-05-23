@@ -1,7 +1,6 @@
 ---
 import '../../styles/yamikage.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import KunaiCursor from '../../components/home/KunaiCursor.tsx';
 import YamikageChrome from '../../components/home/YamikageChrome.tsx';
 import Home from '../../components/home/Home.tsx';
 import { SITE_URL, SOCIAL_LINKS } from '../../consts';
@@ -28,7 +27,6 @@ const jsonLd = {
   jsonLd={jsonLd}
 >
   <main id="main-content" class="v-yk2">
-    <KunaiCursor client:only="react" />
     <YamikageChrome client:only="react" />
 
     <Home client:visible lang={lang} />

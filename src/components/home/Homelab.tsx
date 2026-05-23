@@ -1,4 +1,5 @@
 import type { Locale } from '../../consts';
+import { SECTION_PAD_X } from '../../consts';
 import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
@@ -17,8 +18,8 @@ function parseStat(v: string): { numeric: boolean; pre: string; n: string; suf: 
 export default function Homelab({ lang }: { lang: Locale }) {
   const h = D.homelab;
   return (
-    <section style={{ padding: '60px 84px 80px', position: 'relative' }}>
-      <SHead label={L.homelab} lang={lang} cmd="uptime --rack" />
+    <section style={{ padding: `60px ${SECTION_PAD_X}px 80px`, position: 'relative' }}>
+      <SHead label={L.homelab} lang={lang} />
 
       <div
         className="yk2-homelab-top"
@@ -36,11 +37,6 @@ export default function Homelab({ lang }: { lang: Locale }) {
           >
             “{pickLang(h.summary, lang)}”
           </p>
-          <div className="yk2-mono" style={{ fontSize: 11, color: C.inkFaint, marginTop: 22 }}>
-            <div>
-              <span className="yk2-prompt">⟩</span> uptime --homelab
-            </div>
-          </div>
         </Reveal>
         <Reveal kind="r">
           <div
@@ -94,7 +90,7 @@ export default function Homelab({ lang }: { lang: Locale }) {
         }}
       >
         {h.rigs.map((r, i) => (
-          <Reveal key={i} delay={i * 90}>
+          <Reveal key={r.name.en} delay={i * 90}>
             <div
               className="yk2-card yk2-rig-card"
               style={{

@@ -76,14 +76,23 @@ export function Typewriter({
     if (!seen || startedRef.current) return;
     startedRef.current = true;
     let i = 0;
+    let raf = 0;
+    let lastTime = 0;
     const tStart = window.setTimeout(() => {
-      const id = window.setInterval(() => {
-        i++;
-        setShown(i);
-        if (i >= text.length) window.clearInterval(id);
-      }, speed);
+      const step = (now: number) => {
+        if (now - lastTime >= speed) {
+          lastTime = now;
+          i++;
+          setShown(i);
+        }
+        if (i < text.length) raf = requestAnimationFrame(step);
+      };
+      raf = requestAnimationFrame(step);
     }, startDelay);
-    return () => window.clearTimeout(tStart);
+    return () => {
+      window.clearTimeout(tStart);
+      cancelAnimationFrame(raf);
+    };
   }, [seen, text, speed, startDelay]);
 
   return (
@@ -164,7 +173,7 @@ export function LetterReveal({
     <span ref={ref} className={className} style={style}>
       {text.split('').map((ch, i) => (
         <span
-          key={i}
+          key={`${i}-${ch}`}
           className={'yk2-letter' + (seen ? ' in' : '')}
           style={{
             transitionDelay: delay + i * stagger + 'ms',
@@ -176,35 +185,6 @@ export function LetterReveal({
         </span>
       ))}
     </span>
-  );
-}
-
-/** Mouse-driven parallax wrapper. */
-export function ParallaxKanji({
-  children,
-  strength = 12,
-  style,
-}: {
-  children: ReactNode;
-  strength?: number;
-  style?: CSSProperties;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const onMove = (e: MouseEvent) => {
-      const node = ref.current;
-      if (!node) return;
-      const x = (e.clientX / window.innerWidth - 0.5) * strength;
-      const y = (e.clientY / window.innerHeight - 0.5) * strength;
-      node.style.transform = `translate(${x}px, ${y}px)`;
-    };
-    window.addEventListener('mousemove', onMove);
-    return () => window.removeEventListener('mousemove', onMove);
-  }, [strength]);
-  return (
-    <div ref={ref} className="yk2-px" style={style}>
-      {children}
-    </div>
   );
 }
 

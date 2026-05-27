@@ -4,6 +4,7 @@ import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data
 import { C } from './colors';
 import { SHead } from './pieces';
 import { Counter, Reveal } from './shared';
+import ArchDiagram from './ArchDiagram';
 
 /** Split a stat string like "99.94%" into prefix / number / suffix for the counter.
  *  Falls back to a non-numeric flag for purely textual values (e.g. "Tailscale"). */
@@ -80,6 +81,29 @@ export default function Homelab({ lang }: { lang: Locale }) {
         </Reveal>
       </div>
 
+      <Reveal style={{ marginTop: 36 }}>
+        <div className="yk2-card" style={{ padding: '28px 24px 20px' }}>
+          <div
+            className="yk2-mono"
+            style={{
+              fontSize: 9.5,
+              letterSpacing: '.25em',
+              color: C.seal,
+              textTransform: 'uppercase',
+              marginBottom: 20,
+            }}
+          >
+            {'// '}
+            {lang === 'fr' ? 'architecture réseau' : 'network architecture'}
+          </div>
+          <div style={{ overflowX: 'auto' }}>
+            <div style={{ minWidth: 480 }}>
+              <ArchDiagram lang={lang} />
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
       <div
         className="yk2-rigs-grid"
         style={{
@@ -151,6 +175,51 @@ export default function Homelab({ lang }: { lang: Locale }) {
             </div>
           </Reveal>
         ))}
+      </div>
+
+      <div style={{ marginTop: 48 }}>
+        <div
+          className="yk2-mono"
+          style={{
+            fontSize: 9.5,
+            letterSpacing: '.25em',
+            color: C.seal,
+            textTransform: 'uppercase',
+            marginBottom: 20,
+          }}
+        >
+          {'// '}
+          {lang === 'fr' ? 'pourquoi ces choix ?' : 'stack rationale'}
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+            gap: 14,
+          }}
+        >
+          {h.rationale.map((item) => (
+            <Reveal key={item.q.en}>
+              <div className="yk2-card" style={{ padding: '20px 22px' }}>
+                <div
+                  className="yk2-mono"
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 700,
+                    color: C.ink,
+                    marginBottom: 10,
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {pickLang(item.q, lang)}
+                </div>
+                <p style={{ fontSize: 13, color: C.inkSoft, lineHeight: 1.7, margin: 0 }}>
+                  {pickLang(item.a, lang)}
+                </p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );

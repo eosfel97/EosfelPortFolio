@@ -45,10 +45,16 @@ export interface Stat {
   value: string;
 }
 
+export interface RationaleItem {
+  q: Localized;
+  a: Localized;
+}
+
 export interface Homelab {
   summary: Localized;
   rigs: Rig[];
   stats: Stat[];
+  rationale: RationaleItem[];
 }
 
 export interface TimelineEntry {
@@ -161,10 +167,10 @@ export const PORTFOLIO_DATA: PortfolioData = {
       {
         name: { fr: 'Hôte durci', en: 'Hardened host' },
         specs: [
-          'Debian',
-          'Docker · userns-remap',
-          'cap_drop · no-new-privileges',
-          'Isolation réseau',
+          'Debian · 8 GB RAM',
+          '2 To + backup miroir',
+          'SMART : PASSED · CPU < 0.1',
+          'Docker · userns-remap · cap_drop',
         ],
         role: { fr: 'Base du système', en: 'System foundation' },
       },
@@ -180,15 +186,46 @@ export const PORTFOLIO_DATA: PortfolioData = {
       },
       {
         name: { fr: 'Services & supervision', en: 'Services & monitoring' },
-        specs: ['Vaultwarden', 'smartmontools · Diun', 'Sauvegardes rsync', 'Alertes mail SMTP'],
+        specs: [
+          'Vaultwarden · Portainer',
+          'Diun · socket-proxy',
+          'smartmontools · Alertes SMTP',
+          'Sauvegardes rsync · miroir',
+        ],
         role: { fr: 'Exploitation', en: 'Operations' },
       },
     ],
     stats: [
-      { label: { fr: 'Nœud', en: 'Node' }, value: '1' },
-      { label: { fr: 'HTTPS', en: 'HTTPS' }, value: '100%' },
-      { label: { fr: 'Réseau privé', en: 'Private mesh' }, value: 'Tailscale' },
-      { label: { fr: 'Sauvegardes', en: 'Backups' }, value: 'rsync' },
+      { label: { fr: 'Services', en: 'Services' }, value: '7' },
+      { label: { fr: 'Uptime', en: 'Uptime' }, value: '18d' },
+      { label: { fr: 'SSL Labs', en: 'SSL Labs' }, value: 'A+' },
+      { label: { fr: 'Observatory', en: 'Observatory' }, value: 'B+' },
+    ],
+    rationale: [
+      {
+        q: { fr: 'Pourquoi Caddy plutôt que Nginx ?', en: 'Why Caddy over Nginx?' },
+        a: {
+          fr: 'Caddy gère le HTTPS automatiquement via ACME — zéro certbot, zéro cron. La config est lisible, les headers sécurité tiennent en deux lignes. Nginx aurait marché, mais Caddy demande 70 % de configuration en moins pour le même résultat.',
+          en: 'Caddy handles HTTPS automatically via ACME — no certbot, no cron. Config is readable, security headers are two-liners. Nginx would have worked, but Caddy takes 70% less config for the same outcome.',
+        },
+      },
+      {
+        q: {
+          fr: 'Pourquoi Tailscale plutôt que WireGuard direct ?',
+          en: 'Why Tailscale over raw WireGuard?',
+        },
+        a: {
+          fr: 'Tailscale abstrait WireGuard avec une gestion des clés zero-config et un DNS automatique. Plutôt qu’ouvrir un port SSH sur internet et gérer les clés à la main, j’accède au serveur depuis n’importe où sans exposer aucune surface d’attaque.',
+          en: 'Tailscale wraps WireGuard with zero-config key management and automatic DNS. Instead of opening an SSH port to the internet and managing keys by hand, I reach the server from anywhere with zero exposed attack surface.',
+        },
+      },
+      {
+        q: { fr: 'Pourquoi Cloudflare Tunnel ?', en: 'Why Cloudflare Tunnel?' },
+        a: {
+          fr: 'Le tunnel crée une connexion sortante depuis le serveur — aucun port entrant ouvert sur la box. Le trafic public passe par Cloudflare avant d’atteindre Caddy. Résultat : aucun port exposé directement, ni SSH ni HTTP.',
+          en: 'The tunnel creates an outbound connection from the server — no inbound ports open on the router. Public traffic passes through Cloudflare before reaching Caddy. Result: no ports directly exposed, neither SSH nor HTTP.',
+        },
+      },
     ],
   },
 

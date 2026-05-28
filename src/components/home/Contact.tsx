@@ -151,7 +151,7 @@ export default function Contact({ lang }: { lang: Locale }) {
                 <a
                   href={safeHref(cv.href)}
                   className="yk2-cta"
-                  download=""
+                  download="Gnahiet_any_cv.pdf"
                   aria-label={ARIA.CV[lang]}
                 >
                   <span>{lang === 'fr' ? 'Télécharger le CV' : 'Download CV'}</span>

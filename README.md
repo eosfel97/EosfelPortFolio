@@ -25,13 +25,13 @@ Le serveur démarre sur `http://localhost:4321`.
 
 ## Commandes
 
-| Commande | Action |
-|---|---|
-| `npm run dev` | Serveur de développement |
-| `npm run build` | Build de production dans `dist/` |
-| `npm run preview` | Prévisualiser le build |
-| `npm run lint` | Vérifier le code (ESLint) |
-| `npm run format` | Formater le code (Prettier) |
+| Commande          | Action                           |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Serveur de développement         |
+| `npm run build`   | Build de production dans `dist/` |
+| `npm run preview` | Prévisualiser le build           |
+| `npm run lint`    | Vérifier le code (ESLint)        |
+| `npm run format`  | Formater le code (Prettier)      |
 
 ## Conventions
 

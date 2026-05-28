@@ -68,9 +68,7 @@ const ARIA: Record<string, Record<Locale, string>> = {
 export default function Contact({ lang }: { lang: Locale }) {
   const c = D.contact;
   const email = c.links.find((l) => l.label === 'Email')?.value ?? '';
-  const cv = c.links.find((l) => l.label === 'CV');
   const cvHref = lang === 'en' ? '/cv/cv-en.pdf' : '/cv/cv-fr.pdf';
-  const socialLinks = c.links.filter((l) => l.label !== 'CV');
 
   return (
     <section
@@ -148,19 +146,17 @@ export default function Contact({ lang }: { lang: Locale }) {
                 <span>{lang === 'fr' ? 'Écrire un mail' : 'Write me'}</span>
                 <span style={{ fontSize: 14 }}>→</span>
               </a>
-              {cv && (
-                <a
-                  href={safeHref(cvHref)}
-                  className="yk2-cta"
-                  download="Gnahiet_any_cv.pdf"
-                  aria-label={ARIA.CV[lang]}
-                >
-                  <span>{lang === 'fr' ? 'Télécharger le CV' : 'Download CV'}</span>
-                  <span style={{ display: 'inline-flex' }} aria-hidden>
-                    <CvIcon size={14} />
-                  </span>
-                </a>
-              )}
+              <a
+                href={safeHref(cvHref)}
+                className="yk2-cta"
+                download="Gnahiet_any_cv.pdf"
+                aria-label={ARIA.CV[lang]}
+              >
+                <span>{lang === 'fr' ? 'Télécharger le CV' : 'Download CV'}</span>
+                <span style={{ display: 'inline-flex' }} aria-hidden>
+                  <CvIcon size={14} />
+                </span>
+              </a>
             </div>
           </Reveal>
 
@@ -173,7 +169,7 @@ export default function Contact({ lang }: { lang: Locale }) {
               marginTop: 36,
             }}
           >
-            {socialLinks.map((l, i) => {
+            {c.links.map((l, i) => {
               const Icon = ICONS[l.label];
               if (!Icon) return null;
               const isExternal = /^https?:/i.test(l.href);

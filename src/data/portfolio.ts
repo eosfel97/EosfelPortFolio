@@ -296,7 +296,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
         href: 'https://www.linkedin.com/in/any-gnahiet-075339234',
       },
       { label: 'Email', value: 'any.gouba@gmail.com', href: 'mailto:any.gouba@gmail.com' },
-      { label: 'CV', value: 'cv.pdf', href: '/cv/cv-fr.pdf' },
     ],
   },
 };

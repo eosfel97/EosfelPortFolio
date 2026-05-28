@@ -69,6 +69,7 @@ export default function Contact({ lang }: { lang: Locale }) {
   const c = D.contact;
   const email = c.links.find((l) => l.label === 'Email')?.value ?? '';
   const cv = c.links.find((l) => l.label === 'CV');
+  const cvHref = lang === 'en' ? '/cv/cv-en.pdf' : '/cv/cv-fr.pdf';
   const socialLinks = c.links.filter((l) => l.label !== 'CV');
 
   return (
@@ -149,7 +150,7 @@ export default function Contact({ lang }: { lang: Locale }) {
               </a>
               {cv && (
                 <a
-                  href={safeHref(cv.href)}
+                  href={safeHref(cvHref)}
                   className="yk2-cta"
                   download="Gnahiet_any_cv.pdf"
                   aria-label={ARIA.CV[lang]}

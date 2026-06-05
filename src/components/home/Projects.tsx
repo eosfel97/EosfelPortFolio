@@ -1,9 +1,16 @@
 import type { Locale } from '../../consts';
 import { SECTION_PAD_X } from '../../consts';
+import type { Project } from '../../data/portfolio';
 import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
 import { Reveal } from './shared';
+
+const STATUS_LABELS: Record<Project['status'], Record<Locale, string>> = {
+  'in-progress': { fr: 'en cours', en: 'in-progress' },
+  completed: { fr: 'terminé', en: 'completed' },
+  archived: { fr: 'archivé', en: 'archived' },
+};
 
 export default function Projects({ lang }: { lang: Locale }) {
   return (
@@ -93,12 +100,14 @@ export default function Projects({ lang }: { lang: Locale }) {
                   style={{ fontSize: 11, lineHeight: 1.75, color: C.inkSoft }}
                 >
                   <div>
-                    <span className="yk2-key">year</span> ={' '}
+                    <span className="yk2-key">{lang === 'fr' ? 'année' : 'year'}</span> ={' '}
                     <span className="yk2-str">&quot;{p.year}&quot;</span>
                   </div>
                   <div>
-                    <span className="yk2-key">status</span> ={' '}
-                    <span style={{ color: C.seal, fontWeight: 600 }}>&quot;{p.status}&quot;</span>
+                    <span className="yk2-key">{lang === 'fr' ? 'statut' : 'status'}</span> ={' '}
+                    <span style={{ color: C.seal, fontWeight: 600 }}>
+                      &quot;{STATUS_LABELS[p.status][lang]}&quot;
+                    </span>
                   </div>
                   <div>
                     <span className="yk2-key">stack</span> ={' '}

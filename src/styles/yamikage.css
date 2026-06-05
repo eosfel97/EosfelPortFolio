@@ -614,6 +614,299 @@
   text-shadow: 0 0 12px rgba(255, 80, 80, 0.5);
 }
 
+/* ── NETWORK ARCHITECTURE DIAGRAM ── */
+.yk2-arch {
+  font-family: var(--font-mono);
+  --arch-red: var(--yk-seal);
+  --arch-gold: var(--yk-accent);
+}
+
+.yk2-arch-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.yk2-arch-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 6%;
+}
+.yk2-arch-coltitle {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--yk-ink-faint);
+  margin-bottom: 12px;
+}
+.yk2-arch-coltitle.red {
+  color: var(--arch-red);
+}
+.yk2-arch-coltitle.gold {
+  color: var(--arch-gold);
+}
+
+.yk2-arch-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  width: 100%;
+  max-width: 230px;
+  padding: 11px 14px;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025) 0%, transparent 45%),
+    linear-gradient(180deg, #1f1b17 0%, #181410 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 5px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1),
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+.yk2-arch-node:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 6px 16px rgba(0, 0, 0, 0.5);
+}
+.yk2-arch-node.red {
+  border-color: rgba(239, 68, 68, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 18px rgba(239, 68, 68, 0.14);
+}
+.yk2-arch-node.red:hover {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(239, 68, 68, 0.28);
+}
+.yk2-arch-node.gold {
+  border-color: rgba(212, 168, 56, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 18px rgba(212, 168, 56, 0.12);
+}
+.yk2-arch-node.gold:hover {
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.5),
+    0 0 24px rgba(212, 168, 56, 0.24);
+}
+.yk2-arch-node.hot {
+  border-color: var(--arch-red);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 0 22px rgba(239, 68, 68, 0.22);
+}
+.yk2-arch-node-t {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--yk-ink);
+  line-height: 1.1;
+}
+.yk2-arch-node.red .yk2-arch-node-t,
+.yk2-arch-node.hot .yk2-arch-node-t {
+  color: var(--arch-red);
+}
+.yk2-arch-node.gold .yk2-arch-node-t {
+  color: var(--arch-gold);
+}
+.yk2-arch-node-s {
+  font-size: 9px;
+  color: var(--yk-ink-faint);
+  line-height: 1.2;
+}
+
+/* vertical animated connector */
+.yk2-arch-flow {
+  position: relative;
+  display: block;
+  flex: 0 0 auto;
+  width: 2px;
+  height: 30px;
+  margin: 5px 0;
+  background: var(--yk-line);
+}
+.yk2-arch-flow.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.yk2-arch-flow.gold {
+  background: repeating-linear-gradient(to bottom, var(--yk-line) 0 4px, transparent 4px 8px);
+}
+.yk2-arch-flow::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -60%;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--arch-red), transparent);
+  animation: archFlow 1.8s linear infinite;
+}
+.yk2-arch-flow.gold::after {
+  background: linear-gradient(to bottom, transparent, var(--arch-gold), transparent);
+  animation-delay: 0.4s;
+}
+.yk2-arch-flow::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--arch-red);
+}
+.yk2-arch-flow.gold::before {
+  border-top-color: var(--arch-gold);
+}
+
+@keyframes archFlow {
+  from {
+    top: -60%;
+  }
+  to {
+    top: 100%;
+  }
+}
+
+/* merge: the two channels converge into the host */
+.yk2-arch-merge {
+  position: relative;
+  height: 46px;
+}
+.yk2-arch-merge .bar {
+  position: absolute;
+  top: 18px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--arch-red), var(--arch-gold));
+  opacity: 0.7;
+}
+.yk2-arch-merge .arm {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 18px;
+  margin-left: -1px;
+}
+.yk2-arch-merge .arm.left {
+  left: 25%;
+  background: var(--arch-red);
+}
+.yk2-arch-merge .arm.right {
+  left: 75%;
+  background: repeating-linear-gradient(to bottom, var(--arch-gold) 0 4px, transparent 4px 8px);
+}
+.yk2-arch-merge .stem {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 2px;
+  height: 28px;
+  margin-left: -1px;
+  background: var(--yk-line);
+}
+.yk2-arch-merge .stem::after {
+  content: '';
+  position: absolute;
+  left: -1px;
+  right: -1px;
+  top: -60%;
+  height: 60%;
+  background: linear-gradient(to bottom, transparent, var(--arch-red), transparent);
+  animation: archFlow 1.8s linear infinite;
+}
+.yk2-arch-merge .stem::before {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid var(--arch-red);
+}
+
+/* host panel */
+.yk2-arch-host {
+  position: relative;
+  padding: 16px 18px 18px;
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  border-radius: 8px;
+  background: linear-gradient(180deg, #161410 0%, #100e0a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 0 30px rgba(239, 68, 68, 0.06);
+}
+.yk2-arch-host-h {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.yk2-arch-host-t {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--yk-ink);
+}
+.yk2-arch-docker-t {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--yk-ink-soft);
+}
+.yk2-arch-host-s {
+  font-size: 9px;
+  color: var(--yk-ink-faint);
+}
+.yk2-arch-caddy-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 14px;
+}
+.yk2-arch-caddy-row .yk2-arch-node {
+  max-width: 200px;
+}
+.yk2-arch-ssh {
+  font-size: 9.5px;
+  color: var(--arch-gold);
+  border: 1px dashed rgba(212, 168, 56, 0.5);
+  border-radius: 3px;
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+.yk2-arch-docker {
+  margin-top: 4px;
+  padding: 14px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.25);
+}
+.yk2-arch-services {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+.yk2-arch-services .yk2-arch-node {
+  max-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yk2-arch-flow::after,
+  .yk2-arch-merge .stem::after {
+    animation: none;
+    opacity: 0.5;
+  }
+}
+
 /* ═══════════════ RESPONSIVE ═══════════════ */
 
 /* ── TABLET (≤1024px) ── */

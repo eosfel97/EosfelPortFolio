@@ -1,6 +1,6 @@
 import type { Locale } from '../../consts';
 import { SECTION_PAD_X } from '../../consts';
-import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L } from '../../data/portfolio';
+import { PORTFOLIO_DATA as D, PORTFOLIO_LABELS as L, pickLang } from '../../data/portfolio';
 import { C } from './colors';
 import { SHead } from './pieces';
 import { Reveal } from './shared';
@@ -48,16 +48,16 @@ export default function Stack({ lang }: { lang: Locale }) {
         className="yk2-lang-grid"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(7, 1fr)',
           gap: 14,
           marginBottom: 36,
         }}
       >
         {s.languages.map((l, i) => (
-          <Reveal key={l.name} delay={i * 60}>
+          <Reveal key={pickLang(l.name, 'en')} delay={i * 60}>
             <div className="yk2-card" style={{ padding: '24px 14px', textAlign: 'center' }}>
               <div className="yk2-display" style={{ fontSize: 22, fontWeight: 700, color: C.ink }}>
-                {l.name}
+                {pickLang(l.name, lang)}
               </div>
               <div
                 className="yk2-mono"

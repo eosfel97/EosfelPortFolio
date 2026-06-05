@@ -29,7 +29,7 @@ export interface Project {
 }
 
 export interface Language {
-  name: string;
+  name: string | Localized;
   level: number;
   el: string;
 }
@@ -118,7 +118,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       },
       stack: ['Debian', 'Docker', 'Caddy', 'Tailscale', 'Cloudflare'],
       year: 2026,
-      status: 'in-progress',
+      status: 'completed',
     },
     {
       id: 'portfolio',
@@ -131,7 +131,6 @@ export const PORTFOLIO_DATA: PortfolioData = {
       stack: ['Astro', 'TypeScript', 'React'],
       year: 2026,
       status: 'in-progress',
-      liveUrl: 'https://anygnahiet.dev',
     },
   ],
 
@@ -143,6 +142,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       { name: 'HTML / CSS', level: 4, el: 'form' },
       { name: 'SQL', level: 3, el: 'water' },
       { name: 'Linux', level: 3, el: 'stone' },
+      { name: { fr: 'Réseau', en: 'Network' }, level: 4, el: 'wind' },
     ],
     infra: [
       'Linux (Debian)',
@@ -199,7 +199,7 @@ export const PORTFOLIO_DATA: PortfolioData = {
       { label: { fr: 'Services', en: 'Services' }, value: '7' },
       { label: { fr: 'Uptime', en: 'Uptime' }, value: '18d' },
       { label: { fr: 'SSL Labs', en: 'SSL Labs' }, value: 'A+' },
-      { label: { fr: 'Observatory', en: 'Observatory' }, value: 'B+' },
+      { label: { fr: 'Observatory', en: 'Observatory' }, value: 'A+' },
     ],
     rationale: [
       {
@@ -254,8 +254,8 @@ export const PORTFOLIO_DATA: PortfolioData = {
     {
       year: '2022',
       t: {
-        fr: 'Développeur web & web mobile — Philiance, premier stage',
-        en: 'Web & mobile developer — Philiance, first internship',
+        fr: 'Développeur web & web mobile — Philiance',
+        en: 'Web & mobile developer — Philiance',
       },
     },
     {
@@ -272,8 +272,8 @@ export const PORTFOLIO_DATA: PortfolioData = {
     {
       year: '2025',
       t: {
-        fr: 'Licence pro systèmes d’information (CNAM) · stage HDMNetwork',
-        en: 'Bachelor in information systems (CNAM) · HDMNetwork internship',
+        fr: 'Licence pro systèmes d’information (CNAM)',
+        en: 'Bachelor in information systems (CNAM)',
       },
     },
     {

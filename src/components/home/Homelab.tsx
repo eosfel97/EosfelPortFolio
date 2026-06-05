@@ -47,7 +47,7 @@ export default function Homelab({ lang }: { lang: Locale }) {
             {h.stats.map((s) => {
               const ps = parseStat(s.value);
               return (
-                <div key={s.value} className="yk2-card" style={{ padding: '16px 18px' }}>
+                <div key={s.label.en} className="yk2-card" style={{ padding: '16px 18px' }}>
                   <div
                     className="yk2-display"
                     style={{ fontSize: 34, fontWeight: 700, lineHeight: 1, color: C.seal }}
@@ -83,19 +83,6 @@ export default function Homelab({ lang }: { lang: Locale }) {
 
       <Reveal style={{ marginTop: 36 }}>
         <div className="yk2-card" style={{ padding: '28px 24px 20px' }}>
-          <div
-            className="yk2-mono"
-            style={{
-              fontSize: 9.5,
-              letterSpacing: '.25em',
-              color: C.seal,
-              textTransform: 'uppercase',
-              marginBottom: 20,
-            }}
-          >
-            {'// '}
-            {lang === 'fr' ? 'architecture réseau' : 'network architecture'}
-          </div>
           <div style={{ overflowX: 'auto' }}>
             <div style={{ minWidth: 480 }}>
               <ArchDiagram lang={lang} />
